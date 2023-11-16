@@ -9,47 +9,39 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = FPT_Vote
 build_property.RootNamespace = FPT_Vote
-build_property.ProjectDir = D:\Code\FPT\LocTH\Vote\FPT_Vote\
+build_property.ProjectDir = D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\Code\FPT\LocTH\Vote\FPT_Vote
+build_property.MSBuildProjectDirectory = D:\Code\FPT\Phong\Gamification_Project\FPT_Vote
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/Code/FPT/LocTH/Vote/FPT_Vote/App.razor]
+[D:/Code/FPT/Phong/Gamification_Project/FPT_Vote/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Code/FPT/LocTH/Vote/FPT_Vote/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Code/FPT/LocTH/Vote/FPT_Vote/Pages/Index.razor]
+[D:/Code/FPT/Phong/Gamification_Project/FPT_Vote/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Code/FPT/LocTH/Vote/FPT_Vote/Shared/MainLayout.razor]
+[D:/Code/FPT/Phong/Gamification_Project/FPT_Vote/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Code/FPT/LocTH/Vote/FPT_Vote/Shared/NavMenu.razor]
+[D:/Code/FPT/Phong/Gamification_Project/FPT_Vote/Shared/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Code/FPT/LocTH/Vote/FPT_Vote/Shared/SurveyPrompt.razor]
-build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Code/FPT/LocTH/Vote/FPT_Vote/_Imports.razor]
+[D:/Code/FPT/Phong/Gamification_Project/FPT_Vote/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Code/FPT/LocTH/Vote/FPT_Vote/Pages/Error.cshtml]
+[D:/Code/FPT/Phong/Gamification_Project/FPT_Vote/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Code/FPT/LocTH/Vote/FPT_Vote/Pages/_Host.cshtml]
+[D:/Code/FPT/Phong/Gamification_Project/FPT_Vote/Pages/_Host.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

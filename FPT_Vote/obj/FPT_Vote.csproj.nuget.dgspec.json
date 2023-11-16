@@ -1,31 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Code\\FPT\\LocTH\\Vote\\FPT_Vote\\FPT_Vote.csproj": {}
+    "D:\\Code\\FPT\\Phong\\Gamification_Project\\FPT_Vote\\FPT_Vote.csproj": {}
   },
   "projects": {
-    "D:\\Code\\FPT\\LocTH\\Vote\\FPT_Vote\\FPT_Vote.csproj": {
+    "D:\\Code\\FPT\\Phong\\Gamification_Project\\FPT_Vote\\FPT_Vote.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Code\\FPT\\LocTH\\Vote\\FPT_Vote\\FPT_Vote.csproj",
+        "projectUniqueName": "D:\\Code\\FPT\\Phong\\Gamification_Project\\FPT_Vote\\FPT_Vote.csproj",
         "projectName": "FPT_Vote",
-        "projectPath": "D:\\Code\\FPT\\LocTH\\Vote\\FPT_Vote\\FPT_Vote.csproj",
+        "projectPath": "D:\\Code\\FPT\\Phong\\Gamification_Project\\FPT_Vote\\FPT_Vote.csproj",
         "packagesPath": "C:\\Users\\PhuDatTran\\.nuget\\packages\\",
-        "outputPath": "D:\\Code\\FPT\\LocTH\\Vote\\FPT_Vote\\obj\\",
+        "outputPath": "D:\\Code\\FPT\\Phong\\Gamification_Project\\FPT_Vote\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\PhuDatTran\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net7.0"
+          "net8.0"
         ],
         "sources": {
           "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -36,8 +36,18 @@
         }
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.SignalR.Common": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "NPOI": {
+              "target": "Package",
+              "version": "[2.6.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -49,24 +59,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[7.0.14, 7.0.14]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[7.0.14, 7.0.14]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[7.0.14, 7.0.14]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[7.0.14, 7.0.14]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -75,7 +67,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

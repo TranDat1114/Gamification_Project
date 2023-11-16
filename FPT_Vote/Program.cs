@@ -1,3 +1,6 @@
+using FPT_Vote.IServices;
+using FPT_Vote.Services;
+using FPT_Vote.SignalHub;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -6,7 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-
+builder.Services.AddScoped<IExcelService, ExcelService>();
+builder.Services.AddSignalR();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -22,6 +26,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.MapHub<RealTimeHub>("realtimehub");
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");

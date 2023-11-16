@@ -1,0 +1,32 @@
+﻿@page "/import"
+@inject IExcelService ExcelService;
+<PageTitle>Import file</PageTitle>
+
+<InputFile OnChange="@HandleFileUpload" />
+<button @onclick="ImportData">Import</button>
+
+@* <button class="text-green-400" @onclick="CreateSample">Create Sample</button> *@
+
+
+@code {
+    private IBrowserFile excelFile;
+
+    private async Task HandleFileUpload(InputFileChangeEventArgs e)
+    {
+        excelFile = e.File;
+    }
+
+    private void ImportData()
+    {
+        if (excelFile != null)
+        {
+            // Gọi hàm xử lý import từ thư viện đã chọn
+            var data = ExcelService.ImportAsync(excelFile.OpenReadStream()).Result;
+
+        }
+    }
+    private void CreateSample()
+    {
+        ExcelService.CreateSample("Sample.xlsx");
+    }
+}
