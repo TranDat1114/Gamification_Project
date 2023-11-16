@@ -4,7 +4,12 @@
 <h1 class="text-red-500">Hello, world!</h1>
 
 
-
+@foreach (var item in excelTable)
+{
+    <p>@item.Name</p>
+    <p>@item.Group</p>
+    <p>@item.Point</p>
+}
 
 @code {
     private HubConnection? _hubConnection;
@@ -14,9 +19,9 @@
         _hubConnection = new HubConnectionBuilder()
         .WithUrl(("http://localhost:5177/exceldatahub"))
         .Build();
-        _hubConnection.On<List<ExcelData>>("UpdateTableDude", (message) =>
+        _hubConnection.On<List<ExcelData>>("SendMessage", (datas) =>
         {
-            excelTable = message;
+            excelTable = datas.OrderBy(x => x.Point).ToList();
             InvokeAsync(StateHasChanged);
         });
         await _hubConnection.StartAsync();

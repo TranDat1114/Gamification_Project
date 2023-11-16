@@ -7,9 +7,14 @@ public class ExcelDataHub : Hub<ITableMessageClient>
 {
     public override async Task OnConnectedAsync()
     {
-        await Clients.Client(Context.ConnectionId).ReceiveMessage("Connected");
+        await Clients.All.ReceiveMessage("Connected");
         await base.OnConnectedAsync();
     }
+    public async Task SendDataTableUpdate(List<ExcelData> datas)
+    {
+        await Clients.All.SendMessage(datas);
+    }
+
 
 }
 public interface ITableMessageClient

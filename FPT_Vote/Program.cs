@@ -4,6 +4,7 @@ using FPT_Vote.Services;
 using FPT_Vote.SignalHub;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,8 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddSignalR();
 builder.Services.AddScoped<IExcelService, ExcelService>();
 builder.Services.AddScoped<IExcelSignalService, ExcelSignalService>();
+
+builder.Services.AddResponseCompression(options => options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "application/octet-stream" }));
 
 builder.Services.AddCors();
 

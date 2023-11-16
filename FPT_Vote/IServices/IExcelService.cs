@@ -4,7 +4,7 @@ namespace FPT_Vote.IServices
 {
     public interface IExcelService
     {
-        void ExportToExcel<T>(List<T> data, string sheetName, string title, string fileName);
+        Task ExportToExcel(string filePath, string title, List<ExcelData> datas);
         Task<List<ExcelData>> ImportAsync(Stream stream);
 
         void CreateSample(string filePath);
