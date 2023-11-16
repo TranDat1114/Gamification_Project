@@ -8,15 +8,10 @@
 
 <button class="text-green-400" @onclick="CreateSample">Create Sample</button>
 <button class="text-blue-600" @onclick="ExportData">Export</button>
-
-@foreach (var message in messages)
-{
-    <p>@message</p>
-}
+<button class="text-blue-600" @onclick="EndGame">End Game</button>
 
 @if (excelTable is not null)
 {
-
     foreach (var item in excelTable)
     {
         <p>@item.Name</p>
@@ -58,11 +53,7 @@ else
         _hubConnection = new HubConnectionBuilder()
         .WithUrl(("http://localhost:5177/exceldatahub"))
         .Build();
-        _hubConnection.On<string>("ReceiveMessage", (message) =>
-        {
-            this.messages.Add(message);
-            InvokeAsync(StateHasChanged);
-        });
+
         _hubConnection.On<List<ExcelData>>("SendMessage", (datas) =>
         {
             excelTable = datas;
@@ -80,7 +71,15 @@ else
 
     private async Task PlusPoint(int id)
     {
-        excelTable.Where(x => x.Id == id).FirstOrDefault().Point += 5;
+        var data = excelTable.Where(x => x.Id == id).FirstOrDefault();
+        if (data?.Point + 5 <= 99999)
+        {
+            data.Point += 5;
+        }
+        else
+        {
+            data.Point = 99999;
+        }
         if (_hubConnection is not null)
         {
             await _hubConnection.SendAsync("SendDataTableUpdate", excelTable);
@@ -89,7 +88,16 @@ else
     }
     private async Task MinusPoint(int id)
     {
-        excelTable.Where(x => x.Id == id).FirstOrDefault().Point -= 5;
+        var data = excelTable.Where(x => x.Id == id).FirstOrDefault();
+        if (data?.Point - 5 >= 0)
+        {
+            data.Point -= 5;
+
+        }
+        else
+        {
+            data.Point = 0;
+        }
         if (_hubConnection is not null)
         {
             await _hubConnection.SendAsync("SendDataTableUpdate", excelTable);
@@ -108,5 +116,16 @@ else
     private void ExportData()
     {
         _excelService.ExportToExcel(@"D:\Code\FPT\Phong\Export Data", "Data_1", excelTable);
+    }
+
+    private List<ExcelData> Take3Winner(List<ExcelData> datas)
+    {
+        return datas.OrderByDescending(x => x.Point).Take(3).ToList();
+    }
+
+    private async Task EndGame()
+    {
+        await _hubConnection.SendAsync("EndGame", "End Game");
+        await _hubConnection.SendAsync("SendDataTableUpdate", Take3Winner(excelTable));
     }
 }

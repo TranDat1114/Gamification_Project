@@ -1,7 +1,91 @@
 ﻿@page "/login"
+@implements IAsyncDisposable
+<PageTitle>Index</PageTitle>
 
-<PageTitle>Login</PageTitle>
+@{
+    int count = 0;
+    foreach (var item in excelTable)
+    {
+        count++;
+        <div class="w-96 h-24 relative">
+            <div class="w-96 h-24 left-0 top-0 absolute bg-neutral-800 rounded-lg"></div>
+            <div class="w-96 h-24 left-[25px] top-[4.05px] absolute justify-start items-center gap-20 inline-flex">
+                <div class="h-7 justify-start items-center flex">
+                    <div class="text-white text-2xl font-bold font-['Quicksand']">@count</div>
+                    <div class="text-white text-sm font-normal font-['Quicksand']">@GetOrdinalSuffix(count)
+                    </div>
+                </div>
+                <img class="w-14 h-14 rounded-full" src="https://via.placeholder.com/60x60" />
+                <div class="grow shrink basis-0 text-white text-2xl font-bold font-['Quicksand']">@item.Name
+                </div>
+                <div class="text-white text-2xl font-bold font-['Quicksand']">@item.Group</div>
+                <div class="text-white text-2xl font-bold font-['Quicksand']">@item.Point pts</div>
+                <img class="w-20 h-24" src="https://via.placeholder.com/79x90" />
+            </div>
+        </div>
+    }
+}
 
-<h1 class="text-red-500">HI</h1>
 
-Welcome to your new app.
+
+@code {
+    private HubConnection? _hubConnection;
+    List<ExcelDataShow> excelTable = new();
+    protected override async Task OnInitializedAsync()
+    {
+        _hubConnection = new HubConnectionBuilder()
+        .WithUrl(("http://localhost:5177/exceldatahub"))
+        .Build();
+        _hubConnection.On<List<ExcelData>>("SendMessage", (datas) =>
+        {
+
+
+            datas.OrderByDescending(x => x.Point).ToList().ForEach(x =>
+    {
+    excelTable.Add(new ExcelDataShow(x)
+    );
+            });
+
+            InvokeAsync(StateHasChanged);
+        });
+        await _hubConnection.StartAsync();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_hubConnection is not null)
+        {
+            await _hubConnection.DisposeAsync();
+        }
+    }
+
+    private string GetOrdinalSuffix(int number)
+    {
+        if (number < 1)
+        {
+            return $"th";
+        }
+
+        switch (number % 100)
+        {
+            case 11:
+            case 12:
+            case 13:
+                return $"th";
+        }
+
+        switch (number % 10)
+        {
+            case 1:
+                return $"st";
+            case 2:
+                return $"nd";
+            case 3:
+                return $"rd";
+            default:
+                return $"th";
+        }
+    }
+
+
+}

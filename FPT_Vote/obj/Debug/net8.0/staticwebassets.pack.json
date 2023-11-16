@@ -1,6 +1,54 @@
 {
   "Files": [
     {
+      "Id": "D:\\Code\\FPT\\Phong\\Gamification_Project\\FPT_Vote\\wwwroot\\assets\\Bronze-medal.png",
+      "PackagePath": "staticwebassets\\assets\\Bronze-medal.png"
+    },
+    {
+      "Id": "D:\\Code\\FPT\\Phong\\Gamification_Project\\FPT_Vote\\wwwroot\\assets\\Bronze.png",
+      "PackagePath": "staticwebassets\\assets\\Bronze.png"
+    },
+    {
+      "Id": "D:\\Code\\FPT\\Phong\\Gamification_Project\\FPT_Vote\\wwwroot\\assets\\Challenger.png",
+      "PackagePath": "staticwebassets\\assets\\Challenger.png"
+    },
+    {
+      "Id": "D:\\Code\\FPT\\Phong\\Gamification_Project\\FPT_Vote\\wwwroot\\assets\\Diamond.png",
+      "PackagePath": "staticwebassets\\assets\\Diamond.png"
+    },
+    {
+      "Id": "D:\\Code\\FPT\\Phong\\Gamification_Project\\FPT_Vote\\wwwroot\\assets\\Gold-medal.png",
+      "PackagePath": "staticwebassets\\assets\\Gold-medal.png"
+    },
+    {
+      "Id": "D:\\Code\\FPT\\Phong\\Gamification_Project\\FPT_Vote\\wwwroot\\assets\\Gold.png",
+      "PackagePath": "staticwebassets\\assets\\Gold.png"
+    },
+    {
+      "Id": "D:\\Code\\FPT\\Phong\\Gamification_Project\\FPT_Vote\\wwwroot\\assets\\GrandMaster.png",
+      "PackagePath": "staticwebassets\\assets\\GrandMaster.png"
+    },
+    {
+      "Id": "D:\\Code\\FPT\\Phong\\Gamification_Project\\FPT_Vote\\wwwroot\\assets\\Iron.png",
+      "PackagePath": "staticwebassets\\assets\\Iron.png"
+    },
+    {
+      "Id": "D:\\Code\\FPT\\Phong\\Gamification_Project\\FPT_Vote\\wwwroot\\assets\\Master.png",
+      "PackagePath": "staticwebassets\\assets\\Master.png"
+    },
+    {
+      "Id": "D:\\Code\\FPT\\Phong\\Gamification_Project\\FPT_Vote\\wwwroot\\assets\\Platinum.png",
+      "PackagePath": "staticwebassets\\assets\\Platinum.png"
+    },
+    {
+      "Id": "D:\\Code\\FPT\\Phong\\Gamification_Project\\FPT_Vote\\wwwroot\\assets\\Silver-medal.png",
+      "PackagePath": "staticwebassets\\assets\\Silver-medal.png"
+    },
+    {
+      "Id": "D:\\Code\\FPT\\Phong\\Gamification_Project\\FPT_Vote\\wwwroot\\assets\\Silver.png",
+      "PackagePath": "staticwebassets\\assets\\Silver.png"
+    },
+    {
       "Id": "D:\\Code\\FPT\\Phong\\Gamification_Project\\FPT_Vote\\wwwroot\\css\\app.css",
       "PackagePath": "staticwebassets\\css\\app.css"
     },

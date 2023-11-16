@@ -14,8 +14,10 @@ public class ExcelDataHub : Hub<ITableMessageClient>
     {
         await Clients.All.SendMessage(datas);
     }
-
-
+    public async Task EndGame(string message)
+    {
+        await Clients.All.ReceiveMessage(message);
+    }
 }
 public interface ITableMessageClient
 {

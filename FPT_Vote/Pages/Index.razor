@@ -1,27 +1,104 @@
 ﻿@page "/"
 @implements IAsyncDisposable
-<PageTitle>Index</PageTitle>
-<h1 class="text-red-500">Hello, world!</h1>
+<PageTitle>Home</PageTitle>
+
+<div class="p-6 h-full w-full bg-[rgb(36,36,36,0.5)] ">
+    @if (message != "End Game")
+    {
 
 
-@foreach (var item in excelTable)
-{
-    <p>@item.Name</p>
-    <p>@item.Group</p>
-    <p>@item.Point</p>
-}
+        <div class="grid grid-flow-row gap-2 overflow-y-hidden">
+            @{
+                if (excelTable.Count > 0)
+                {
+                    int count = 0;
+                    foreach (var item in excelTable)
+                    {
+                        count++;
+                        <div class="lg:h-24 w-full rounded-lg bg-[#242424]">
+                            <div class="grid grid-cols-12 lg:gap-5 items-center justify-items-center mx-6">
+                                <div class="items-center flex w-12 col-span-1">
+                                    <div class="text-white lg:text-2xl font-bold font-['Quicksand']">@count</div>
+                                    <div class="text-white lg:text-sm font-normal font-['Quicksand']">@GetOrdinalSuffix(count)
+                                    </div>
+                                </div>
+                                <img class="col-span-2 lg:w-14 w-8 h-8 lg:h-14 rounded-full"
+                                    src=@($"https://picsum.photos/56/56?random={@item.Id}") />
+                                <div class="col-span-3 text-white lg:text-2xl font-bold font-['Quicksand']">@item.Name
+                                </div>
+                                <div class="col-span-2 text-white lg:text-2xl font-bold font-['Quicksand']">@item.Group</div>
+                                <div class="col-span-2 text-white lg:text-2xl font-bold font-['Quicksand']">@item.Point pts</div>
+                                <img class="col-span-2 lg:w-20 lg:h-24" src=@($"./assets/{item.RankImage}") />
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="h-full w-full flex items-center justify-center">
+                        <div class=" text-white text-2xl font-bold font-['Quicksand']">There is nothing to show</div>
+                    </div>
+                }
+
+            }
+        </div>
+    }
+    else
+    {
+        <div class="w-96 h-96 justify-start items-end inline-flex">
+            <div class="w-64 relative">
+                <div class="w-64 h-80 left-0 top-[190px] absolute">
+                    <div class="w-64 h-80 left-0 top-0 absolute bg-teal-500"></div>
+                    <img class="w-44 h-44 left-[36px] top-[40px] absolute shadow"
+                        src="https://via.placeholder.com/178x175" />
+                </div>
+                <img class="w-44 h-44 left-[40px] top-0 absolute rounded-full" src="https://via.placeholder.com/170x170" />
+            </div>
+            <div class="w-64 relative">
+                <div class="w-64 h-96 left-0 top-[190px] absolute">
+                    <div class="w-64 h-96 left-0 top-0 absolute bg-amber-400 shadow"></div>
+                    <img class="w-44 h-44 left-[36px] top-[40px] absolute shadow"
+                        src="https://via.placeholder.com/178x175" />
+                </div>
+                <img class="w-44 h-44 left-[40px] top-0 absolute rounded-full" src="https://via.placeholder.com/170x170" />
+            </div>
+            <div class="w-64 h-96 relative">
+                <div class="w-64 h-64 left-0 top-[190px] absolute bg-green-500 shadow-inner"></div>
+                <img class="w-44 h-44 left-[36px] top-[230px] absolute shadow" src="https://via.placeholder.com/178x175" />
+                <img class="w-44 h-44 left-[40px] top-0 absolute rounded-full" src="https://via.placeholder.com/170x170" />
+            </div>
+        </div>
+    }
+
+</div>
+
+
 
 @code {
     private HubConnection? _hubConnection;
-    List<ExcelData> excelTable = new();
+    private string message;
+    List<ExcelDataShow> excelTable = new();
     protected override async Task OnInitializedAsync()
     {
         _hubConnection = new HubConnectionBuilder()
         .WithUrl(("http://localhost:5177/exceldatahub"))
         .Build();
+
+        _hubConnection.On<string>("ReceiveMessage", (message) =>
+        {
+            this.message = message;
+            InvokeAsync(StateHasChanged);
+        });
+
         _hubConnection.On<List<ExcelData>>("SendMessage", (datas) =>
         {
-            excelTable = datas.OrderBy(x => x.Point).ToList();
+            excelTable.Clear();
+            datas.OrderByDescending(x => x.Point).ToList().ForEach(x =>
+    {
+    excelTable.Add(new ExcelDataShow(x)
+    );
+            });
+
             InvokeAsync(StateHasChanged);
         });
         await _hubConnection.StartAsync();
@@ -34,5 +111,34 @@
             await _hubConnection.DisposeAsync();
         }
     }
+
+    private string GetOrdinalSuffix(int number)
+    {
+        if (number < 1)
+        {
+            return $"th";
+        }
+
+        switch (number % 100)
+        {
+            case 11:
+            case 12:
+            case 13:
+                return $"th";
+        }
+
+        switch (number % 10)
+        {
+            case 1:
+                return $"st";
+            case 2:
+                return $"nd";
+            case 3:
+                return $"rd";
+            default:
+                return $"th";
+        }
+    }
+
 
 }
