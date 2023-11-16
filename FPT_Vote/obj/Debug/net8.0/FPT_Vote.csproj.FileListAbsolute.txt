@@ -53,3 +53,6 @@ D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\bin\Debug\net8.0\runtimes\win\li
 D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\obj\Debug\net8.0\FPT_Vote.csproj.CopyComplete
+D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\bin\Debug\net8.0\Microsoft.AspNetCore.Http.Connections.Client.dll
+D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Client.dll
+D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Client.Core.dll

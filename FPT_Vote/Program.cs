@@ -1,3 +1,4 @@
+using FPT_Vote.ExcelDataHub;
 using FPT_Vote.IServices;
 using FPT_Vote.Services;
 using FPT_Vote.SignalHub;
@@ -9,8 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddScoped<IExcelService, ExcelService>();
 builder.Services.AddSignalR();
+builder.Services.AddScoped<IExcelService, ExcelService>();
+builder.Services.AddScoped<IExcelSignalService, ExcelSignalService>();
+
+builder.Services.AddCors();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -21,13 +26,14 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
 app.UseRouting();
 
-app.MapHub<RealTimeHub>("realtimehub");
+app.MapHub<ExcelDataHub>("/exceldatahub");
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");

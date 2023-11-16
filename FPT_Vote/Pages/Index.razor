@@ -1,7 +1,33 @@
 ﻿@page "/"
-
+@implements IAsyncDisposable
 <PageTitle>Index</PageTitle>
-
 <h1 class="text-red-500">Hello, world!</h1>
 
-Welcome to your new app.
+
+
+
+@code {
+    private HubConnection? _hubConnection;
+    List<ExcelData> excelTable = new();
+    protected override async Task OnInitializedAsync()
+    {
+        _hubConnection = new HubConnectionBuilder()
+        .WithUrl(("http://localhost:5177/exceldatahub"))
+        .Build();
+        _hubConnection.On<List<ExcelData>>("UpdateTableDude", (message) =>
+        {
+            excelTable = message;
+            InvokeAsync(StateHasChanged);
+        });
+        await _hubConnection.StartAsync();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_hubConnection is not null)
+        {
+            await _hubConnection.DisposeAsync();
+        }
+    }
+
+}

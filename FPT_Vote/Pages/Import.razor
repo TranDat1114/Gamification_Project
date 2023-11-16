@@ -1,5 +1,6 @@
 ﻿@page "/import"
-@inject IExcelService ExcelService;
+@inject IExcelService _excelService;
+@inject IExcelSignalService _excelSignalService;
 <PageTitle>Import file</PageTitle>
 
 <InputFile OnChange="@HandleFileUpload" />
@@ -10,23 +11,37 @@
 
 @code {
     private IBrowserFile excelFile;
+    private HubConnection? _hubConnection;
 
     private async Task HandleFileUpload(InputFileChangeEventArgs e)
     {
         excelFile = e.File;
     }
 
-    private void ImportData()
+    private async void ImportData()
     {
         if (excelFile != null)
         {
             // Gọi hàm xử lý import từ thư viện đã chọn
-            var data = ExcelService.ImportAsync(excelFile.OpenReadStream()).Result;
+            var datas = _excelService.ImportAsync(excelFile.OpenReadStream()).Result;
+            await UpdateExcelData(datas);
 
         }
     }
+
+    private async Task UpdateExcelData(List<ExcelData> datas)
+    {
+        if (_hubConnection is not null)
+        {
+            await _hubConnection.SendAsync("SendMessage", datas);
+        }
+    }
+
+    public bool IsConnected => _hubConnection?.State == HubConnectionState.Connected;
+
+
     private void CreateSample()
     {
-        ExcelService.CreateSample("Sample.xlsx");
+        _excelService.CreateSample("Sample.xlsx");
     }
 }
