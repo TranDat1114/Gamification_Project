@@ -1,91 +1,58 @@
 ﻿@page "/login"
-@implements IAsyncDisposable
-<PageTitle>Index</PageTitle>
 
-@{
-    int count = 0;
-    foreach (var item in excelTable)
-    {
-        count++;
-        <div class="w-96 h-24 relative">
-            <div class="w-96 h-24 left-0 top-0 absolute bg-neutral-800 rounded-lg"></div>
-            <div class="w-96 h-24 left-[25px] top-[4.05px] absolute justify-start items-center gap-20 inline-flex">
-                <div class="h-7 justify-start items-center flex">
-                    <div class="text-white text-2xl font-bold font-['Quicksand']">@count</div>
-                    <div class="text-white text-sm font-normal font-['Quicksand']">@GetOrdinalSuffix(count)
-                    </div>
+@inject UserAccountService _userAccountService
+@inject IJSRuntime js
+@inject AuthenticationStateProvider _authenticationStateProvider
+@inject NavigationManager _navigationManager
+<PageTitle>Login</PageTitle>
+<div class="md:p-6 p-1 min-h-min w-[500px] bg-white rounded-md shadow-lg m-auto">
+    <div class="p-8">
+        <p class="font-bold text-3xl font-['QuickSand']">Login</p>
+        <p class=" text-stone-500 font-['QuickSand']">Input your email and password</p>
+
+        <div class="mt-4">
+            <div class="grid gap-2 items-center">
+                <div>
+                    <p class="font-['QuickSand'] font-bold">Email</p>
+                    <input class="w-full border border-stone-300 rounded-md p-2 font-['QuickSand']" @bind="model.Email" type="email"
+                        placeholder="Input your email" />
                 </div>
-                <img class="w-14 h-14 rounded-full" src="https://via.placeholder.com/60x60" />
-                <div class="grow shrink basis-0 text-white text-2xl font-bold font-['Quicksand']">@item.Name
+                <div>
+                    <p class="font-['QuickSand'] font-bold">Password</p>
+                    <input class="w-full border border-stone-300 rounded-md p-2 font-['QuickSand']" type="password" @bind=model.Password
+                        placeholder="Input your password">
                 </div>
-                <div class="text-white text-2xl font-bold font-['Quicksand']">@item.Group</div>
-                <div class="text-white text-2xl font-bold font-['Quicksand']">@item.Point pts</div>
-                <img class="w-20 h-24" src="https://via.placeholder.com/79x90" />
+            </div>
+            <div class="mt-4 flex justify-end">
+                <button class="bg-black px-4 text-white rounded-md p-2 font-['QuickSand']" @onclick="Authenticate">Login</button>
             </div>
         </div>
-    }
-}
-
-
+    </div>
+</div>
 
 @code {
-    private HubConnection? _hubConnection;
-    List<ExcelDataShow> excelTable = new();
-    protected override async Task OnInitializedAsync()
+
+    private class Model
     {
-        _hubConnection = new HubConnectionBuilder()
-        .WithUrl(("http://localhost:5177/exceldatahub"))
-        .Build();
-        _hubConnection.On<List<ExcelData>>("SendMessage", (datas) =>
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
+    private Model model = new Model();
+
+    private async Task Authenticate()
+    {
+        var result = await _userAccountService.GetByUserName(model.Email);
+        if (result is null || result.Password != model.Password)
         {
-
-
-            datas.OrderByDescending(x => x.Point).ToList().ForEach(x =>
-    {
-    excelTable.Add(new ExcelDataShow(x)
-    );
+            await js.InvokeVoidAsync("alert", "Email or password is incorrect");
+            return;
+        }
+        var customAuthStateProvider = (CustomAuthenticationStateProvider)_authenticationStateProvider;
+        await customAuthStateProvider.UpdateAuthenticationState(new UserSession
+            {
+                Email = result.Email,
+                Role = result.Role,
             });
-
-            InvokeAsync(StateHasChanged);
-        });
-        await _hubConnection.StartAsync();
+        _navigationManager.NavigateTo("/import");
     }
-
-    public async ValueTask DisposeAsync()
-    {
-        if (_hubConnection is not null)
-        {
-            await _hubConnection.DisposeAsync();
-        }
-    }
-
-    private string GetOrdinalSuffix(int number)
-    {
-        if (number < 1)
-        {
-            return $"th";
-        }
-
-        switch (number % 100)
-        {
-            case 11:
-            case 12:
-            case 13:
-                return $"th";
-        }
-
-        switch (number % 10)
-        {
-            case 1:
-                return $"st";
-            case 2:
-                return $"nd";
-            case 3:
-                return $"rd";
-            default:
-                return $"th";
-        }
-    }
-
-
 }

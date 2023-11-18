@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ZnoCsN2QYFCCztAAAP40tFjFKyDVoNXWK/g00Gqe7Ok=",
+  "Hash": "adEMayS7AscfUBL+iJthlMpygmSH3EYwRxKMR4qshNI=",
   "Source": "FPT_Vote",
   "BasePath": "_content/FPT_Vote",
   "Mode": "Default",
@@ -471,6 +471,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.png"
+    },
+    {
+      "Identity": "D:\\Code\\FPT\\Phong\\Gamification_Project\\FPT_Vote\\wwwroot\\js\\lucide-create.js",
+      "SourceId": "FPT_Vote",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Code\\FPT\\Phong\\Gamification_Project\\FPT_Vote\\wwwroot\\",
+      "BasePath": "_content/FPT_Vote",
+      "RelativePath": "js/lucide-create.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\lucide-create.js"
+    },
+    {
+      "Identity": "D:\\Code\\FPT\\Phong\\Gamification_Project\\FPT_Vote\\wwwroot\\js\\save-file.js",
+      "SourceId": "FPT_Vote",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Code\\FPT\\Phong\\Gamification_Project\\FPT_Vote\\wwwroot\\",
+      "BasePath": "_content/FPT_Vote",
+      "RelativePath": "js/save-file.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\save-file.js"
     }
   ]
 }

@@ -97,6 +97,14 @@
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
+      "Id": "D:\\Code\\FPT\\Phong\\Gamification_Project\\FPT_Vote\\wwwroot\\js\\lucide-create.js",
+      "PackagePath": "staticwebassets\\js\\lucide-create.js"
+    },
+    {
+      "Id": "D:\\Code\\FPT\\Phong\\Gamification_Project\\FPT_Vote\\wwwroot\\js\\save-file.js",
+      "PackagePath": "staticwebassets\\js\\save-file.js"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.FPT_Vote.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

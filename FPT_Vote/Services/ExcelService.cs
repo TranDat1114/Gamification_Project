@@ -74,9 +74,16 @@ public class ExcelService : IExcelService
     {
         var dataModels = new List<ExcelData>
         {
-            new() { Id=1, Name = "John", Group = "A", Point = 100 },
-            new() { Id=2,Name = "Jane", Group = "B", Point = 150 },
-            new() { Id=3,Name = "Bob", Group = "A", Point = 120 },
+            new() { Id=1, Name = "Trần Hoàng", Group = "A", Point = 0 },
+            new() { Id=2,Name = "Jay Andy", Group = "B", Point = 0 },
+            new() { Id=3,Name = "Thân Hoàng Lộc", Group = "A", Point = 0 },
+            new() { Id=4,Name = "Phan Viết Thế", Group = "A", Point = 0 },
+            new() { Id=5,Name = "Nguyễn Tăng Thanh Phương", Group = "A", Point = 0 },
+            new() { Id=6,Name = "Bob", Group = "B", Point = 0 },
+            new() { Id=7,Name = "Rock", Group = "B", Point = 0 },
+            new() { Id=8,Name = "Stone", Group = "B", Point = 0 },
+            new() { Id=9,Name = "Kick", Group = "B", Point = 0 },
+            new() { Id=10,Name = "Ice", Group = "A", Point = 0 },
             // Thêm các đối tượng DataModel khác nếu cần
         };
 
@@ -112,7 +119,13 @@ public class ExcelService : IExcelService
 
     public async Task ExportToExcel(string filePath, string title, List<ExcelData> datas)
     {
-        string filePathAndName = filePath + "/" + title + ".xlsx";
+        string folderPath = Path.GetDirectoryName(filePath);
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
+
+        string filePathAndName = Path.Combine(folderPath, title + ".xlsx");
         using var workbook = new XSSFWorkbook();
         // Tạo một worksheet mới
         var worksheet = workbook.CreateSheet("SampleSheet");

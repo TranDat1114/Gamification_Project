@@ -2,11 +2,9 @@
 @implements IAsyncDisposable
 <PageTitle>Home</PageTitle>
 
-<div class="p-6 h-full w-full bg-[rgb(36,36,36,0.5)] ">
+<div class="md:p-6 p-1 min-h-min w-full bg-white rounded-md shadow-lg">
     @if (message != "End Game")
     {
-
-
         <div class="grid grid-flow-row gap-2 overflow-y-hidden">
             @{
                 if (excelTable.Count > 0)
@@ -15,20 +13,20 @@
                     foreach (var item in excelTable)
                     {
                         count++;
-                        <div class="lg:h-24 w-full rounded-lg bg-[#242424]">
-                            <div class="grid grid-cols-12 lg:gap-5 items-center justify-items-center mx-6">
+                        <div class="lg:h-20 w-full rounded-lg bg-[#f5f5f5] shadow-sm">
+                            <div class="grid grid-cols-12 lg:gap-5 items-center justify-items-start mx-6">
                                 <div class="items-center flex w-12 col-span-1">
-                                    <div class="text-white lg:text-2xl font-bold font-['Quicksand']">@count</div>
-                                    <div class="text-white lg:text-sm font-normal font-['Quicksand']">@GetOrdinalSuffix(count)
+                                    <div class="lg:text-2xl font-bold font-['Quicksand']">@count</div>
+                                    <div class="lg:text-sm font-normal font-['Quicksand']">@GetOrdinalSuffix(count)
                                     </div>
                                 </div>
                                 <img class="col-span-2 lg:w-14 w-8 h-8 lg:h-14 rounded-full"
                                     src=@($"https://picsum.photos/56/56?random={@item.Id}") />
-                                <div class="col-span-3 text-white lg:text-2xl font-bold font-['Quicksand']">@item.Name
+                                <div class="col-span-3 lg:text-2xl font-bold font-['Quicksand']">@item.Name
                                 </div>
-                                <div class="col-span-2 text-white lg:text-2xl font-bold font-['Quicksand']">@item.Group</div>
-                                <div class="col-span-2 text-white lg:text-2xl font-bold font-['Quicksand']">@item.Point pts</div>
-                                <img class="col-span-2 lg:w-20 lg:h-24" src=@($"./assets/{item.RankImage}") />
+                                <div class="col-span-2 lg:text-2xl font-bold font-['Quicksand']">@item.Group</div>
+                                <div class="col-span-2 lg:text-2xl font-bold font-['Quicksand']">@item.Point pts</div>
+                                <img class="col-span-2 lg:w-18 lg:h-20" src=@($"./assets/{item.RankImage}") />
                             </div>
                         </div>
                     }
@@ -36,7 +34,7 @@
                 else
                 {
                     <div class="h-full w-full flex items-center justify-center">
-                        <div class=" text-white text-2xl font-bold font-['Quicksand']">There is nothing to show</div>
+                        <div class="text-2xl font-bold font-['Quicksand']">There is nothing to show</div>
                     </div>
                 }
 
@@ -45,27 +43,86 @@
     }
     else
     {
-        <div class="w-96 h-96 justify-start items-end inline-flex">
-            <div class="w-64 relative">
-                <div class="w-64 h-80 left-0 top-[190px] absolute">
-                    <div class="w-64 h-80 left-0 top-0 absolute bg-teal-500"></div>
-                    <img class="w-44 h-44 left-[36px] top-[40px] absolute shadow"
-                        src="https://via.placeholder.com/178x175" />
+        @* <div class="w-96 h-96 justify-start items-end inline-flex">
+    <div class="w-64 relative">
+    <div class="w-64 h-80 left-0 top-[190px] absolute">
+    <div class="w-64 h-80 left-0 top-0 absolute bg-teal-500"></div>
+    <img class="w-44 h-44 left-[36px] top-[40px] absolute shadow" src="./assets/Silver-medal.png" />
+    </div>
+    <img class="w-44 h-44 left-[40px] top-0 absolute rounded-full"
+    src=@($"https://picsum.photos/56/56?random={excelTable[0].Id}") />
+    </div>
+    <div class="w-64 relative">
+    <div class="w-64 h-96 left-0 top-[190px] absolute">
+    <div class="w-64 h-96 left-0 top-0 absolute bg-amber-400 shadow"></div>
+    <img class="w-44 h-44 left-[36px] top-[40px] absolute shadow" src="./assets/Gold-medal.png" />
+    </div>
+    <img class="w-44 h-44 left-[40px] top-0 absolute rounded-full"
+    src=@($"https://picsum.photos/56/56?random={excelTable[1].Id}") />
+    </div>
+    <div class="w-64 h-96 relative">
+    <div class="w-64 h-64 left-0 top-[190px] absolute bg-green-500 shadow-inner"></div>
+    <img class="w-44 h-44 left-[36px] top-[230px] absolute shadow" src="./assets/Bronze-medal.png" />
+    <img class="w-44 h-44 left-[40px] top-0 absolute rounded-full"
+    src=@($"https://picsum.photos/56/56?random={excelTable[2].Id}") />
+    </div>
+    </div> *@
+
+        <div class="w-full h-[800px] relative ">
+            <div class="bottom-0 absolute top-0 w-full grid grid-cols-3 items-end gap-2">
+                <div class="w-full bottom-0 h-full relative">
+                    <div class="w-full">
+                        <img class="md:w-44 md:h-44 h-32 w-32 rounded-full m-auto drop-shadow-lg"
+                            src=@($"https://picsum.photos/400/400?random={excelTable[1].Id}") />
+                    </div>
+                    <div class="w-full absolute bottom-0 h-[60%] bg-teal-500 rounded-t-lg shadow-lg">
+                        <div class="w-full my-8">
+                            <p
+                                class="text-center font-bold font-['QuickSand'] lg:text-3xl text-xl text-white drop-shadow-lg">
+                                @excelTable[1].Name</p>
+                        </div>
+                        <div class="w-full">
+                            <img class="md:w-48 md:h-44 h-32 w-32 drop-shadow-lg m-auto" src="./assets/Silver-medal.png" />
+                        </div>
+                    </div>
                 </div>
-                <img class="w-44 h-44 left-[40px] top-0 absolute rounded-full" src="https://via.placeholder.com/170x170" />
-            </div>
-            <div class="w-64 relative">
-                <div class="w-64 h-96 left-0 top-[190px] absolute">
-                    <div class="w-64 h-96 left-0 top-0 absolute bg-amber-400 shadow"></div>
-                    <img class="w-44 h-44 left-[36px] top-[40px] absolute shadow"
-                        src="https://via.placeholder.com/178x175" />
+                <div class="w-full bottom-0 h-full relative">
+                    <div class="w-full">
+                        <img class="md:w-44 md:h-44 h-32 w-32 rounded-full m-auto drop-shadow-lg"
+                            src=@($"https://picsum.photos/400/400?random={excelTable[0].Id}") />
+                    </div>
+                    <div class="w-full absolute bottom-0 h-[75%] bg-amber-400 rounded-t-lg shadow-lg">
+                        <div class="w-full my-8">
+                            <p
+                                class="text-center font-bold font-['QuickSand'] lg:text-3xl text-xl text-white drop-shadow-lg">
+                                @excelTable[0].Name</p>
+                        </div>
+                        <div class="w-full">
+                            <img class="md:w-48 md:h-44 h-32 w-32 drop-shadow-lg m-auto" src="./assets/Gold-medal.png" />
+                        </div>
+                    </div>
                 </div>
-                <img class="w-44 h-44 left-[40px] top-0 absolute rounded-full" src="https://via.placeholder.com/170x170" />
+                <div class="w-full bottom-0 h-full relative">
+                    <div class="w-full">
+                        <img class="md:w-44 md:h-44 h-32 w-32 rounded-full m-auto drop-shadow-lg"
+                            src=@($"https://picsum.photos/400/400?random={excelTable[2].Id}") />
+                    </div>
+                    <div class="w-full absolute bottom-0 h-[50%] bg-green-500 rounded-t-lg shadow-lg">
+                        <div class="w-full my-8">
+                            <p
+                                class="text-center font-bold font-['QuickSand'] lg:text-3xl text-xl text-white drop-shadow-lg">
+                                @excelTable[2].Name</p>
+                        </div>
+                        <div class="w-full">
+                            <img class="md:w-44 md:h-44 h-32 w-32 drop-shadow-lg m-auto" src="./assets/Bronze-medal.png" />
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="w-64 h-96 relative">
-                <div class="w-64 h-64 left-0 top-[190px] absolute bg-green-500 shadow-inner"></div>
-                <img class="w-44 h-44 left-[36px] top-[230px] absolute shadow" src="https://via.placeholder.com/178x175" />
-                <img class="w-44 h-44 left-[40px] top-0 absolute rounded-full" src="https://via.placeholder.com/170x170" />
+            <div class="absolute w-full h-full ">
+                <dotlottie-player class="w-full h-full"
+                    src="https://lottie.host/8f7837d6-c655-4443-bdc0-1a9d340f8307/ibeWhwJJsO.json" background="transparent"
+                    speed="1" loop autoplay></dotlottie-player>
             </div>
         </div>
     }
@@ -73,10 +130,14 @@
 </div>
 
 
+<div class="@toastClass">
+    <p>@message</p>
+    <button @onclick="HideToast">Close</button>
+</div>
 
 @code {
     private HubConnection? _hubConnection;
-    private string message;
+    private string message = "";
     List<ExcelDataShow> excelTable = new();
     protected override async Task OnInitializedAsync()
     {
@@ -93,16 +154,17 @@
         _hubConnection.On<List<ExcelData>>("SendMessage", (datas) =>
         {
             excelTable.Clear();
-            datas.OrderByDescending(x => x.Point).ToList().ForEach(x =>
+            datas.OrderByDescending(x => x.Point)
+    .ToList()
+    .ForEach(x =>
     {
-    excelTable.Add(new ExcelDataShow(x)
-    );
+    excelTable.Add(new ExcelDataShow(x));
             });
-
             InvokeAsync(StateHasChanged);
         });
         await _hubConnection.StartAsync();
     }
+
 
     public async ValueTask DisposeAsync()
     {
@@ -112,6 +174,21 @@
         }
     }
 
+    private string toastClass = "hidden";
+
+    public void ShowToast(string message)
+    {
+        this.message = message;
+        toastClass = "block";
+        StateHasChanged();
+        // Tự động ẩn toast sau một khoảng thời gian nếu cần
+        Task.Delay(5000).ContinueWith(_ => HideToast());
+    }
+    private void HideToast()
+    {
+        toastClass = "hidden";
+        StateHasChanged();
+    }
     private string GetOrdinalSuffix(int number)
     {
         if (number < 1)

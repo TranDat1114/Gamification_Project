@@ -22,8 +22,12 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Code/FPT/Phong/Gamification_Project/FPT_Vote/Pages/Import.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW1wb3J0LnJhem9y
+[D:/Code/FPT/Phong/Gamification_Project/FPT_Vote/Pages/Accessdenied.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjZXNzZGVuaWVkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Code/FPT/Phong/Gamification_Project/FPT_Vote/Pages/ImportFile.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW1wb3J0RmlsZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Code/FPT/Phong/Gamification_Project/FPT_Vote/Pages/Index.razor]
