@@ -70,7 +70,7 @@ public class ExcelService : IExcelService
         }
     }
 
-    public void CreateSample(string filePath)
+    public async Task CreateSample(string filePath, string title)
     {
         var dataModels = new List<ExcelData>
         {
@@ -87,33 +87,38 @@ public class ExcelService : IExcelService
             // Thêm các đối tượng DataModel khác nếu cần
         };
 
-        using (var workbook = new XSSFWorkbook())
+        string folderPath = Path.GetDirectoryName(filePath);
+        string filePathAndName = Path.Combine(folderPath, title + ".xlsx");
+
+        if (!Directory.Exists(folderPath))
         {
-            // Tạo một worksheet mới
-            var worksheet = workbook.CreateSheet("SampleSheet");
-
-            // Tạo một dòng mới cho tiêu đề cột
-            var headerRow = worksheet.CreateRow(0);
-            headerRow.CreateCell(0).SetCellValue("Id");
-            headerRow.CreateCell(1).SetCellValue("Name");
-            headerRow.CreateCell(2).SetCellValue("Group");
-            headerRow.CreateCell(3).SetCellValue("Point");
-
-            // Ghi dữ liệu từ danh sách DataModel vào worksheet
-            for (int i = 0; i < dataModels.Count; i++)
-            {
-                var dataModel = dataModels[i];
-                var dataRow = worksheet.CreateRow(i + 1);
-                dataRow.CreateCell(0).SetCellValue(dataModel.Id);
-                dataRow.CreateCell(1).SetCellValue(dataModel.Name);
-                dataRow.CreateCell(2).SetCellValue(dataModel.Group);
-                dataRow.CreateCell(3).SetCellValue(dataModel.Point);
-            }
-
-            // Lưu workbook xuống đĩa
-            using var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write);
-            workbook.Write(fileStream);
+            Directory.CreateDirectory(folderPath);
         }
+        using var workbook = new XSSFWorkbook();
+        // Tạo một worksheet mới
+        var worksheet = workbook.CreateSheet("SampleSheet");
+
+        // Tạo một dòng mới cho tiêu đề cột
+        var headerRow = worksheet.CreateRow(0);
+        headerRow.CreateCell(0).SetCellValue("Id");
+        headerRow.CreateCell(1).SetCellValue("Name");
+        headerRow.CreateCell(2).SetCellValue("Group");
+        headerRow.CreateCell(3).SetCellValue("Point");
+
+        // Ghi dữ liệu từ danh sách DataModel vào worksheet
+        for (int i = 0; i < dataModels.Count; i++)
+        {
+            var dataModel = dataModels[i];
+            var dataRow = worksheet.CreateRow(i + 1);
+            dataRow.CreateCell(0).SetCellValue(dataModel.Id);
+            dataRow.CreateCell(1).SetCellValue(dataModel.Name);
+            dataRow.CreateCell(2).SetCellValue(dataModel.Group);
+            dataRow.CreateCell(3).SetCellValue(dataModel.Point);
+        }
+
+        // Lưu workbook xuống đĩa
+        using var fileStream = new FileStream(filePathAndName, FileMode.Create, FileAccess.Write);
+        workbook.Write(fileStream);
 
     }
 
@@ -128,7 +133,7 @@ public class ExcelService : IExcelService
         string filePathAndName = Path.Combine(folderPath, title + ".xlsx");
         using var workbook = new XSSFWorkbook();
         // Tạo một worksheet mới
-        var worksheet = workbook.CreateSheet("SampleSheet");
+        var worksheet = workbook.CreateSheet("Sheet 1");
 
         // Tạo một dòng mới cho tiêu đề cột
         var headerRow = worksheet.CreateRow(0);

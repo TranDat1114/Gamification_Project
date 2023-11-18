@@ -9,4 +9,8 @@ public class JsInterpop
     {
         return jsRuntime.InvokeVoidAsync("saveAsFile", filename, Convert.ToBase64String(data));
     }
+    public ValueTask LucideCreate(IJSRuntime jsRuntime)
+    {
+        return jsRuntime.InvokeVoidAsync("LucideCreate");
+    }
 }

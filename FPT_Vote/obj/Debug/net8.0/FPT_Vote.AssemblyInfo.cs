@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FPT_Vote")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0d285bfcf505f6093feca2c8aa33dfca44a7f98d")]
 [assembly: System.Reflection.AssemblyProductAttribute("FPT_Vote")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FPT_Vote")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

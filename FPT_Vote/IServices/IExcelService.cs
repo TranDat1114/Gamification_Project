@@ -7,6 +7,6 @@ namespace FPT_Vote.IServices
         Task ExportToExcel(string filePath, string title, List<ExcelData> datas);
         Task<List<ExcelData>> ImportAsync(Stream stream);
 
-        void CreateSample(string filePath);
+        Task CreateSample(string filePath, string title);
     }
 }

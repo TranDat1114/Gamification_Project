@@ -1,6 +1,5 @@
 ﻿@page "/import"
 @inject IExcelService _excelService;
-@inject IExcelSignalService _excelSignalService;
 @inject IJSRuntime js;
 @inject JsInterpop _jsInterpop;
 @attribute [Authorize(Roles = "Admin")]
@@ -15,6 +14,7 @@
             </svg>
             <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span></p>
             <p class="text-xs text-gray-500 dark:text-gray-400">Xlsx file only</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">And make sure that your file in right format</p>
         </div>
         }else{
             <div class="flex flex-col items-center justify-center pt-5 pb-6">
@@ -38,7 +38,6 @@
 
     <button class="text-pink-500 px-4 py-2 bg-white shadow-lg rounded-lg border" @onclick="ImportData">Import</button>
 
-    <button class="text-black px-4 py-2 bg-white shadow-lg rounded-lg border" @onclick="CreateSample">Create Sample</button>
     <button class="text-blue-600 px-4 py-2 bg-white shadow-lg rounded-lg border" @onclick="ExportData">Export</button>
     <button class="text-red-500 px-4 py-2 bg-white shadow-lg rounded-lg border" @onclick="EndGame">@(!end?"End Game":"Show Result")</button>
 
@@ -93,7 +92,13 @@
             else
             {
                 <p class="text-center">There is no thing to show</p>
-                <p class="text-center">Choice a file and click import</p>
+                <p class="text-center">Choice a file and click import </p>
+
+
+<div class="w-full flex justify-center items-center mt-2">
+    <button class="text-black px-4 py-2  bg-white shadow-lg rounded-lg border" @onclick="CreateSample">Create Sample File</button>
+</div>
+
             }
 
 </div>
@@ -189,7 +194,10 @@
 
     private async Task CreateSample()
     {
-        _excelService.CreateSample(@"ExportData\Sample.xlsx");
+        _excelService.CreateSample(@"./ExportData","Sample");
+        byte[] fileData = GetYourFileData("./ExportData/Sample.xlsx");
+    await _jsInterpop.SaveFileAs("Sample.xlsx", fileData, js);
+        await DeleteFile("./ExportData/Sample.xlsx");
     }
     private byte[] GetYourFileData(string filePath)
     {

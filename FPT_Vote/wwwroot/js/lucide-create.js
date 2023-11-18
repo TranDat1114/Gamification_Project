@@ -1,1 +1,3 @@
-lucide.createIcons();
+window.LucideCreate = () => {
+    lucide.createIcons();
+}
