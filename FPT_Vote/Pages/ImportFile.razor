@@ -193,7 +193,7 @@
     }
     private async Task ExportData()
     {
-        _excelService.ExportToExcel(@"ExportData", "Data_1", excelTable);
+        _excelService.ExportToExcel(@"./ExportData/", "Data_1", excelTable);
      @* byte[] fileData = GetYourFileData();
 
      await _jsInterpop.SaveFileAs("example.txt", fileData, js); *@
