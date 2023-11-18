@@ -43,30 +43,7 @@
     }
     else
     {
-        @* <div class="w-96 h-96 justify-start items-end inline-flex">
-    <div class="w-64 relative">
-    <div class="w-64 h-80 left-0 top-[190px] absolute">
-    <div class="w-64 h-80 left-0 top-0 absolute bg-teal-500"></div>
-    <img class="w-44 h-44 left-[36px] top-[40px] absolute shadow" src="./assets/Silver-medal.png" />
-    </div>
-    <img class="w-44 h-44 left-[40px] top-0 absolute rounded-full"
-    src=@($"https://picsum.photos/56/56?random={excelTable[0].Id}") />
-    </div>
-    <div class="w-64 relative">
-    <div class="w-64 h-96 left-0 top-[190px] absolute">
-    <div class="w-64 h-96 left-0 top-0 absolute bg-amber-400 shadow"></div>
-    <img class="w-44 h-44 left-[36px] top-[40px] absolute shadow" src="./assets/Gold-medal.png" />
-    </div>
-    <img class="w-44 h-44 left-[40px] top-0 absolute rounded-full"
-    src=@($"https://picsum.photos/56/56?random={excelTable[1].Id}") />
-    </div>
-    <div class="w-64 h-96 relative">
-    <div class="w-64 h-64 left-0 top-[190px] absolute bg-green-500 shadow-inner"></div>
-    <img class="w-44 h-44 left-[36px] top-[230px] absolute shadow" src="./assets/Bronze-medal.png" />
-    <img class="w-44 h-44 left-[40px] top-0 absolute rounded-full"
-    src=@($"https://picsum.photos/56/56?random={excelTable[2].Id}") />
-    </div>
-    </div> *@
+
 
         <div class="w-full h-[800px] relative ">
             <div class="bottom-0 absolute top-0 w-full grid grid-cols-3 items-end gap-2">
@@ -82,7 +59,7 @@
                                 @excelTable[1].Name</p>
                         </div>
                         <div class="w-full">
-                            <img class="md:w-48 md:h-44 h-32 w-32 drop-shadow-lg m-auto" src="./assets/Silver-medal.png" />
+                            <img class="md:w-44 md:h-44 h-32 w-32 drop-shadow-lg m-auto" src="./assets/Silver-medal.png" />
                         </div>
                     </div>
                 </div>
@@ -98,7 +75,7 @@
                                 @excelTable[0].Name</p>
                         </div>
                         <div class="w-full">
-                            <img class="md:w-48 md:h-44 h-32 w-32 drop-shadow-lg m-auto" src="./assets/Gold-medal.png" />
+                            <img class="md:w-44 md:h-44 h-32 w-32 drop-shadow-lg m-auto" src="./assets/Gold-medal.png" />
                         </div>
                     </div>
                 </div>

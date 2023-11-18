@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
+    <Folder Include="ExportData\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NPOI" Version="2.6.2" />

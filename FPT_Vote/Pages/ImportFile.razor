@@ -40,7 +40,7 @@
 
     <button class="text-black px-4 py-2 bg-white shadow-lg rounded-lg border" @onclick="CreateSample">Create Sample</button>
     <button class="text-blue-600 px-4 py-2 bg-white shadow-lg rounded-lg border" @onclick="ExportData">Export</button>
-    <button class="text-red-500 px-4 py-2 bg-white shadow-lg rounded-lg border" @onclick="EndGame">End Game</button>
+    <button class="text-red-500 px-4 py-2 bg-white shadow-lg rounded-lg border" @onclick="EndGame">@(!end?"End Game":"Show Result")</button>
 
     <button class="text-green-500 px-4 py-2 bg-white shadow-lg rounded-lg border" @onclick="SortPoint">Sort</button>
     </div>
@@ -48,6 +48,8 @@
 }
 @if (excelTable is not null)
             {
+                <div class=" bg-white shadow-lg min-h-min p-4 rounded-lg">
+
     <table class="table-auto border-collapse border border-slate-500 w-full ">
         <thead>
             <tr class="my-2">
@@ -85,6 +87,8 @@
                 }
                     </tbody>
     </table>
+                </div>
+
 }
             else
             {
@@ -99,6 +103,7 @@
     private List<ExcelData> excelTable { get; set; }
     private HubConnection? _hubConnection;
 
+    private bool end { get; set; } = false;
     private string fileName { get; set; } ="No file selected";
 
     private List<string> messages { get; set; } = new List<string>();
@@ -186,27 +191,40 @@
     {
         _excelService.CreateSample(@"ExportData\Sample.xlsx");
     }
-    private byte[] GetYourFileData()
+    private byte[] GetYourFileData(string filePath)
     {
-        // Replace this with logic to get your file data
-        return System.Text.Encoding.UTF8.GetBytes("Hello, this is your file content!");
+        byte[] fileData = System.IO.File.ReadAllBytes(filePath);
+        return fileData;
     }
     private async Task ExportData()
     {
-        _excelService.ExportToExcel(@"./ExportData/", "Data_1", excelTable);
-     @* byte[] fileData = GetYourFileData();
-
-     await _jsInterpop.SaveFileAs("example.txt", fileData, js); *@
+        await _excelService.ExportToExcel(@"./ExportData/", "Data", excelTable);
+        byte[] fileData = GetYourFileData("./ExportData/Data.xlsx");
+    await _jsInterpop.SaveFileAs("Data.xlsx", fileData, js);
+        await DeleteFile("./ExportData/Data.xlsx");
     }
 
-    private List<ExcelData> Take3Winner(List<ExcelData> datas)
+private async Task DeleteFile(string filePath)
+{
+    if (System.IO.File.Exists(filePath))
     {
-        return datas.OrderByDescending(x => x.Point).Take(3).ToList();
+        System.IO.File.Delete(filePath);
     }
+}
 
-    private async Task EndGame()
-    {
-        await _hubConnection.SendAsync("EndGame", "End Game");
+private List<ExcelData> Take3Winner(List<ExcelData> datas)
+{
+    return datas.OrderByDescending(x => x.Point).Take(3).ToList();
+}
+
+private async Task EndGame()
+{
+    if(!end){
+            await _hubConnection.SendAsync("EndGame", "End Game");
+            end = true;
+    }else{
+            await _hubConnection.SendAsync("EndGame", "Start Game");
+            end = false;
+        }
     }
-
 }
