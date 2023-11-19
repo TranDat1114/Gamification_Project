@@ -41,7 +41,8 @@
     <button class="text-blue-600 px-4 py-2 bg-white shadow-lg rounded-lg border" @onclick="ExportData">Export</button>
     <button class="text-red-500 px-4 py-2 bg-white shadow-lg rounded-lg border" @onclick="EndGame">@(!end?"End Game":"Show Result")</button>
 
-    <button class="text-green-500 px-4 py-2 bg-white shadow-lg rounded-lg border" @onclick="SortPoint">Sort</button>
+    <button class="text-green-500 px-4 py-2 bg-white shadow-lg rounded-lg border" @onclick="SortPoint">Sort Point</button>
+    <button class="text-yellow-500 px-4 py-2 bg-white shadow-lg rounded-lg border" @onclick="SortGroup">Sort Group</button>
     </div>
 
 }
@@ -118,25 +119,32 @@
         fileName = excelFile.Name;
     }
 
-    private async void ImportData()
+    private async Task ImportData()
     {
         if (excelFile is not null)
         {
             // Gọi hàm xử lý import từ thư viện đã chọn
             var datas = await _excelService.ImportAsync(excelFile.OpenReadStream());
-            UpdateExcelData(datas);
+            await UpdateExcelData(datas);
         }
     }
 
     protected override async Task OnInitializedAsync()
     {
         _hubConnection = new HubConnectionBuilder()
-        .WithUrl(("http://localhost:5177/exceldatahub"))
+        .WithUrl(("http://localhost:5000/exceldatahub"))
         .Build();
 
-        _hubConnection.On<List<ExcelData>>("SendMessage", (datas) =>
+        _hubConnection.On<List<ExcelData>,string>("SendMessage", (datas,message) =>
         {
             excelTable = datas;
+            InvokeAsync(StateHasChanged);
+        });
+         _hubConnection.On<string>("ReceiveMessage", (message) =>
+        {
+            if(message == "Connected new client"){
+                UpdateExcelData(excelTable);
+            }
             InvokeAsync(StateHasChanged);
         });
         await _hubConnection.StartAsync();
@@ -187,7 +195,31 @@
     private async Task SortPoint()
     {
         excelTable = excelTable.OrderByDescending(x => x.Point).ToList();
+
+        if (_hubConnection is not null)
+        {
+            await _hubConnection.SendAsync("SendDataTableSort", excelTable);
+        }
+}
+
+private async Task SortGroup()
+{
+    var groupedData = excelTable.GroupBy(x => x.Group)
+                               .Select(g => new { Group = g.Key, TotalPoints = g.Sum(x => x.Point), Data = g.OrderByDescending(x => x.Point).ToList() })
+                               .OrderByDescending(g => g.TotalPoints)
+                               .ToList();
+
+    excelTable.Clear();
+    foreach (var groupData in groupedData)
+    {
+        excelTable.AddRange(groupData.Data);
     }
+
+    if (_hubConnection is not null)
+    {
+        await _hubConnection.SendAsync("SendDataTableSort", excelTable);
+    }
+}
 
     private bool IsConnected => _hubConnection?.State == HubConnectionState.Connected;
 

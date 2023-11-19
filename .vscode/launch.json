@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "name": "C#: FPT_Vote [Default Configuration]",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}\\FPT_Vote\\FPT_Vote.csproj"
+        }
+    ]
+}
