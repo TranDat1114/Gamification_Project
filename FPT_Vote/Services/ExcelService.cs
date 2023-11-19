@@ -70,7 +70,7 @@ public class ExcelService : IExcelService
         }
     }
 
-    public async Task CreateSample(string filePath, string title)
+    public async Task<string> CreateSample(string filePath, string title)
     {
         var dataModels = new List<ExcelData>
         {
@@ -119,7 +119,7 @@ public class ExcelService : IExcelService
         // Lưu workbook xuống đĩa
         using var fileStream = new FileStream(filePathAndName, FileMode.Create, FileAccess.Write);
         workbook.Write(fileStream);
-
+        return filePathAndName;
     }
 
     public async Task ExportToExcel(string filePath, string title, List<ExcelData> datas)

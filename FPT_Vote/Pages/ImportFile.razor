@@ -194,9 +194,9 @@
 
     private async Task CreateSample()
     {
-        _excelService.CreateSample(@"./ExportData","Sample");
-        byte[] fileData = GetYourFileData("./ExportData/Sample.xlsx");
-    await _jsInterpop.SaveFileAs("Sample.xlsx", fileData, js);
+        var path = await _excelService.CreateSample(@"./ExportData","Sample");
+        byte[] fileData = GetYourFileData(path);
+        await _jsInterpop.SaveFileAs("Sample.xlsx", fileData, js);
         await DeleteFile("./ExportData/Sample.xlsx");
     }
     private byte[] GetYourFileData(string filePath)

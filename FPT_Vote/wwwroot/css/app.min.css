@@ -675,16 +675,16 @@ video {
   margin-bottom: 1rem;
 }
 
+.mt-2{
+  margin-top: 0.5rem;
+}
+
 .mt-4{
   margin-top: 1rem;
 }
 
 .mt-8{
   margin-top: 2rem;
-}
-
-.mt-2{
-  margin-top: 0.5rem;
 }
 
 .block{
@@ -782,11 +782,6 @@ video {
 
 .w-full{
   width: 100%;
-}
-
-.w-fit{
-  width: -moz-fit-content;
-  width: fit-content;
 }
 
 .flex-shrink-0{
