@@ -109,6 +109,9 @@
     private List<ExcelData> excelTable { get; set; }
     private HubConnection? _hubConnection;
 
+    private int RangePoint { get; set; } = 1;
+
+
     private bool end { get; set; } = false;
     private string fileName { get; set; } ="No file selected";
 
@@ -160,9 +163,9 @@
     private async Task PlusPoint(int id)
     {
         var data = excelTable.Where(x => x.Id == id).FirstOrDefault();
-        if (data?.Point + 5 <= 99999)
+        if (data?.Point + RangePoint <= 99999)
         {
-            data.Point += 5;
+            data.Point += RangePoint;
         }
         else
         {
@@ -177,9 +180,9 @@
     private async Task MinusPoint(int id)
     {
         var data = excelTable.Where(x => x.Id == id).FirstOrDefault();
-        if (data?.Point - 5 >= 0)
+        if (data?.Point - RangePoint >= 0)
         {
-            data.Point -= 5;
+            data.Point -= RangePoint;
 
         }
         else

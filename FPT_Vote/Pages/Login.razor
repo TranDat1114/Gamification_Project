@@ -5,26 +5,30 @@
 @inject AuthenticationStateProvider _authenticationStateProvider
 @inject NavigationManager _navigationManager
 <PageTitle>Login</PageTitle>
-<div class="md:p-6 p-1 min-h-min w-[500px] bg-white rounded-md shadow-lg m-auto">
-    <div class="p-8">
-        <p class="font-bold text-3xl font-['QuickSand']">Login</p>
-        <p class=" text-stone-500 font-['QuickSand']">Input your email and password</p>
+<div class=" mx-2 w-full">
 
-        <div class="mt-4">
-            <div class="grid gap-2 items-center">
-                <div>
-                    <p class="font-['QuickSand'] font-bold">Email</p>
-                    <input class="w-full border border-stone-300 rounded-md p-2 font-['QuickSand']" @bind="model.Email" type="email"
-                        placeholder="Input your email" />
+    <div class="md:p-6 p-1 min-h-min max-w-[500px] w-full bg-white rounded-md shadow-lg m-auto">
+        <div class="p-8">
+            <p class="font-bold text-3xl font-['QuickSand']">Login</p>
+            <p class=" text-stone-500 font-['QuickSand']">Input your email and password</p>
+
+            <div class="mt-4">
+                <div class="grid gap-2 items-center">
+                    <div>
+                        <p class="font-['QuickSand'] font-bold">Email</p>
+                        <input class="w-full border border-stone-300 rounded-md p-2 font-['QuickSand']"
+                            @bind="model.Email" type="email" placeholder="Input your email" />
+                    </div>
+                    <div>
+                        <p class="font-['QuickSand'] font-bold">Password</p>
+                        <input class="w-full border border-stone-300 rounded-md p-2 font-['QuickSand']" type="password"
+                            @bind=model.Password placeholder="Input your password">
+                    </div>
                 </div>
-                <div>
-                    <p class="font-['QuickSand'] font-bold">Password</p>
-                    <input class="w-full border border-stone-300 rounded-md p-2 font-['QuickSand']" type="password" @bind=model.Password
-                        placeholder="Input your password">
+                <div class="mt-4 flex justify-end">
+                    <button class="bg-black px-4 text-white rounded-md p-2 font-['QuickSand']"
+                        @onclick="Authenticate">Login</button>
                 </div>
-            </div>
-            <div class="mt-4 flex justify-end">
-                <button class="bg-black px-4 text-white rounded-md p-2 font-['QuickSand']" @onclick="Authenticate">Login</button>
             </div>
         </div>
     </div>
