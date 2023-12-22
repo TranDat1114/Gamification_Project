@@ -3,109 +3,231 @@
 @inject IJSRuntime _js;
 <PageTitle>Home</PageTitle>
 
-<div class="md:p-6 p-1 min-h-min w-full bg-white rounded-md shadow-lg">
-    @if (message != "End Game")
+<div class=" w-full ">
+    @if (message != "End Game Individually" && message != "End Game Group")
     {
-        <div class="grid grid-flow-row gap-2 overflow-y-hidden">
-            @{
-                if (excelTable.Count > 0)
-                {
-                    int count = 0;
-                    foreach (var item in excelTable)
+        <div class="flex md:flex-row flex-col gap-5 justify-center">
+            <div class="grid grid-flow-row gap-2 bg-white p-4 rounded-md shadow-lg ">
+                @{
+                    if (excelTable.Count > 0)
                     {
-                        count++;
+                        int count = 0;
                         <div class="lg:h-20 w-full rounded-lg bg-[#f5f5f5] shadow-sm">
-                            <div class="grid grid-cols-12 lg:gap-5 items-center justify-items-start mx-6">
+                            <div class="grid grid-cols-12 gap-2 lg:gap-5 items-center justify-items-start mx-6">
                                 <div class="items-center flex w-12 col-span-1">
-                                    <div class="lg:text-2xl font-bold font-['Quicksand']">@count</div>
-                                    <div class="lg:text-sm font-normal font-['Quicksand']">@GetOrdinalSuffix(count)
+                                    <div class="lg:text-2xl font-bold font-['Quicksand']">Rank</div>
+                                    <div class="lg:text-sm font-normal font-['Quicksand']">st</div>
+                                </div>
+                                <div class="col-span-2  lg:w-14 w-8 h-8 lg:h-14"></div>
+
+                                <div class="col-span-3 lg:text-2xl font-bold font-['Quicksand']">Name
+                                </div>
+                                <div class="col-span-2 lg:text-2xl font-bold font-['Quicksand']">Group</div>
+                                <div class="col-span-2 lg:text-2xl font-bold font-['Quicksand']">Point</div>
+                                <div class="col-span-2 lg:text-2xl font-bold font-['Quicksand']">Rank</div>
+
+                            </div>
+                        </div>
+                        foreach (var item in excelTable)
+                        {
+                            count++;
+                            <div class="lg:h-20 w-full rounded-lg bg-[#f5f5f5] shadow-sm">
+                                <div class="grid grid-cols-12 gap-2 lg:gap-5 items-center justify-items-start mx-6">
+                                    <div class="items-center flex w-12 col-span-1">
+                                        <div class="lg:text-2xl font-bold font-['Quicksand']">@count</div>
+                                        <div class="lg:text-sm font-normal font-['Quicksand']">@GetOrdinalSuffix(count)
+                                        </div>
                                     </div>
+                                    <img class="col-span-2 lg:w-14 w-8 h-8 lg:h-14 rounded-full"
+                                        src=@($"https://picsum.photos/56/56?random={@item.Id}") />
+                                    <div class="col-span-3 lg:text-2xl font-bold font-['Quicksand']">@item.Name
+                                    </div>
+                                    <div class="col-span-2 lg:text-2xl font-bold font-['Quicksand']">@item.Group</div>
+                                    <div class="col-span-2 lg:text-2xl font-bold font-['Quicksand']">@item.Point pts</div>
+                                    <img class="col-span-2 w-16 h-16 lg:w-18 lg:h-20" src=@($"./assets/{item.RankImage}") />
                                 </div>
-                                <img class="col-span-2 lg:w-14 w-8 h-8 lg:h-14 rounded-full"
-                                    src=@($"https://picsum.photos/56/56?random={@item.Id}") />
-                                <div class="col-span-3 lg:text-2xl font-bold font-['Quicksand']">@item.Name
-                                </div>
-                                <div class="col-span-2 lg:text-2xl font-bold font-['Quicksand']">@item.Group</div>
-                                <div class="col-span-2 lg:text-2xl font-bold font-['Quicksand']">@item.Point pts</div>
-                                <img class="col-span-2 w-16 h-16 lg:w-18 lg:h-20" src=@($"./assets/{item.RankImage}") />
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="h-full w-full flex items-center justify-center flex-col">
+                            <div class="text-2xl font-bold font-['Quicksand']">There is nothing to show</div>
+
+                            <div class="mt-4">
+                                <button class="p-4 shadow-lg border rounded-xl" @onclick=RefreshData>
+                                    Click to refresh data from admin
+                                </button>
                             </div>
                         </div>
                     }
                 }
-                else
-                {
-                    <div class="h-full w-full flex items-center justify-center flex-col">
-                        <div class="text-2xl font-bold font-['Quicksand']">There is nothing to show</div>
+            </div>
 
-                        <div class="mt-4">
-                            <button class="p-4 shadow-lg border rounded-xl" @onclick=RefreshData>
-                                Click to refresh data from admin
-                            </button>
+            @{
+                if (excelGroup.Count > 0)
+                {
+                    int count = 0;
+                    <div class="md:w-[400px] w-full bg-white p-4 rounded-md shadow-lg">
+                        <div class="lg:h-20 w-full rounded-lg shadow-sm flex gap-2 flex-col">
+                            <div class="lg:h-20 w-full rounded-lg bg-[#f5f5f5] shadow-sm p-4">
+                                <div class="flex flex-row gap-2 items-center justify-between">
+                                    <div class="items-center flex w-12 col-span-1">
+                                        <div class="lg:text-2xl font-bold font-['Quicksand']">Rank</div>
+                                        <div class="lg:text-sm font-normal font-['Quicksand']">st</div>
+                                    </div>
+
+                                    <div class="col-span-3 lg:text-2xl font-bold font-['Quicksand']">Group</div>
+                                    <div class="col-span-2 lg:text-2xl font-bold font-['Quicksand']">Point</div>
+                                </div>
+                            </div>
+
+                            @foreach (var item in excelGroup)
+                            {
+                                count++;
+                                <div class="lg:h-20 w-full rounded-lg bg-[#f5f5f5] shadow-sm p-4">
+                                    <div class="flex flex-row gap-2 items-center justify-between">
+                                        <div class="items-center flex w-12 col-span-1">
+                                            <div class="lg:text-2xl font-bold font-['Quicksand']">@count</div>
+                                            <div class="lg:text-sm font-normal font-['Quicksand']">@GetOrdinalSuffix(count)
+                                            </div>
+                                        </div>
+
+                                        <div class="col-span-3 lg:text-2xl font-bold font-['Quicksand']">@item.GroupName
+                                        </div>
+                                        <div class="col-span-2 lg:text-2xl font-bold font-['Quicksand']">@item.Point pts</div>
+                                    </div>
+                                </div>
+                            }
                         </div>
                     </div>
                 }
             }
+
         </div>
     }
     else
     {
-        <div class="w-full h-[800px] relative ">
-            <div class="bottom-0 absolute top-0 w-full grid grid-cols-3 items-end gap-2">
-                <div class="w-full bottom-0 h-full relative">
-                    <div class="w-full">
-                        <img class="md:w-44 md:h-44 h-32 w-32 rounded-full m-auto drop-shadow-lg"
-                            src=@($"https://picsum.photos/400/400?random={excelTable[1].Id}") />
-                    </div>
-                    <div class="w-full absolute bottom-0 h-[60%] bg-teal-500 rounded-t-lg shadow-lg">
-                        <div class="w-full my-8">
-                            <p
-                                class="text-center font-bold font-['QuickSand'] lg:text-3xl text-xl text-white drop-shadow-lg">
-                                @excelTable[1].Name</p>
-                        </div>
+        if (message != "End Game Individually")
+        {
+            <div class="w-full h-[800px] relative ">
+                <div class="bottom-0 absolute top-0 w-full flex items-end justify-center">
+                    @* <div class="w-full bottom-0 h-full relative">
                         <div class="w-full">
-                            <img class="md:w-44 md:h-44 h-32 w-32 drop-shadow-lg m-auto" src="./assets/Silver-medal.png" />
+                            <img class="md:w-44 md:h-44 h-32 w-32 rounded-full m-auto drop-shadow-lg"
+                                src=@($"https://picsum.photos/400/400?random={excelGroup[1].GroupId}") />
+                        </div>
+                        <div class="w-full absolute bottom-0 h-[60%] bg-teal-500 rounded-t-lg shadow-lg">
+                            <div class="w-full my-8">
+                                <p
+                                    class="text-center font-bold font-['QuickSand'] lg:text-3xl text-xl text-white drop-shadow-lg">
+                                    @excelGroup[1].GroupName</p>
+                            </div>
+                            <div class="w-full">
+                                <img class="md:w-44 md:h-44 h-32 w-32 drop-shadow-lg m-auto" src="./assets/Silver-medal.png" />
+                            </div>
+                        </div>
+                    </div> *@
+                    <div class="w-[300px] bottom-0 h-full relative m-auto ">
+                        <div class="w-full">
+                            <img class="md:w-44 md:h-44 h-32 w-32 rounded-full m-auto drop-shadow-lg"
+                                src=@($"https://picsum.photos/400/400?random={excelGroup[0].GroupId}") />
+                        </div>
+                        <div class="w-full absolute bottom-0 h-[75%] bg-amber-400 rounded-t-lg shadow-lg">
+                            <div class="w-full my-8">
+                                <p
+                                    class="text-center font-bold font-['QuickSand'] lg:text-3xl text-xl text-white drop-shadow-lg">
+                                    @excelGroup[0].GroupName</p>
+                            </div>
+                            <div class="w-full">
+                                <img class="md:w-44 md:h-44 h-32 w-32 drop-shadow-lg m-auto" src="./assets/Gold-medal.png" />
+                            </div>
                         </div>
                     </div>
+                    @* <div class="w-full bottom-0 h-full relative">
+                        <div class="w-full">
+                            <img class="md:w-44 md:h-44 h-32 w-32 rounded-full m-auto drop-shadow-lg"
+                                src=@($"https://picsum.photos/400/400?random={excelGroup[2].GroupId}") />
+                        </div>
+                        <div class="w-full absolute bottom-0 h-[50%] bg-green-500 rounded-t-lg shadow-lg">
+                            <div class="w-full my-8">
+                                <p
+                                    class="text-center font-bold font-['QuickSand'] lg:text-3xl text-xl text-white drop-shadow-lg">
+                                    @excelGroup[2].GroupName</p>
+                            </div>
+                            <div class="w-full">
+                                <img class="md:w-44 md:h-44 h-32 w-32 drop-shadow-lg m-auto" src="./assets/Bronze-medal.png" />
+                            </div>
+                        </div>
+                    </div> *@
                 </div>
-                <div class="w-full bottom-0 h-full relative">
-                    <div class="w-full">
-                        <img class="md:w-44 md:h-44 h-32 w-32 rounded-full m-auto drop-shadow-lg"
-                            src=@($"https://picsum.photos/400/400?random={excelTable[0].Id}") />
-                    </div>
-                    <div class="w-full absolute bottom-0 h-[75%] bg-amber-400 rounded-t-lg shadow-lg">
-                        <div class="w-full my-8">
-                            <p
-                                class="text-center font-bold font-['QuickSand'] lg:text-3xl text-xl text-white drop-shadow-lg">
-                                @excelTable[0].Name</p>
-                        </div>
-                        <div class="w-full">
-                            <img class="md:w-44 md:h-44 h-32 w-32 drop-shadow-lg m-auto" src="./assets/Gold-medal.png" />
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full bottom-0 h-full relative">
-                    <div class="w-full">
-                        <img class="md:w-44 md:h-44 h-32 w-32 rounded-full m-auto drop-shadow-lg"
-                            src=@($"https://picsum.photos/400/400?random={excelTable[2].Id}") />
-                    </div>
-                    <div class="w-full absolute bottom-0 h-[50%] bg-green-500 rounded-t-lg shadow-lg">
-                        <div class="w-full my-8">
-                            <p
-                                class="text-center font-bold font-['QuickSand'] lg:text-3xl text-xl text-white drop-shadow-lg">
-                                @excelTable[2].Name</p>
-                        </div>
-                        <div class="w-full">
-                            <img class="md:w-44 md:h-44 h-32 w-32 drop-shadow-lg m-auto" src="./assets/Bronze-medal.png" />
-                        </div>
-                    </div>
+                <div class="absolute w-full h-full ">
+                    <dotlottie-player class="w-full h-full"
+                        src="https://lottie.host/8f7837d6-c655-4443-bdc0-1a9d340f8307/ibeWhwJJsO.json" background="transparent"
+                        speed="1" loop autoplay></dotlottie-player>
                 </div>
             </div>
-            <div class="absolute w-full h-full ">
-                <dotlottie-player class="w-full h-full"
-                    src="https://lottie.host/8f7837d6-c655-4443-bdc0-1a9d340f8307/ibeWhwJJsO.json" background="transparent"
-                    speed="1" loop autoplay></dotlottie-player>
+        }else{
+           <div class="w-full h-[800px] relative ">
+                <div class="bottom-0 absolute top-0 w-full grid grid-cols-3 items-end gap-2">
+                    <div class="w-full bottom-0 h-full relative">
+                        <div class="w-full">
+                            <img class="md:w-44 md:h-44 h-32 w-32 rounded-full m-auto drop-shadow-lg"
+                                src=@($"https://picsum.photos/400/400?random={excelTable[1].Id}") />
+                        </div>
+                        <div class="w-full absolute bottom-0 h-[60%] bg-teal-500 rounded-t-lg shadow-lg">
+                            <div class="w-full my-8">
+                                <p
+                                    class="text-center font-bold font-['QuickSand'] lg:text-3xl text-xl text-white drop-shadow-lg">
+                                    @excelTable[1].Name</p>
+                            </div>
+                            <div class="w-full">
+                                <img class="md:w-44 md:h-44 h-32 w-32 drop-shadow-lg m-auto" src="./assets/Silver-medal.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full bottom-0 h-full relative">
+                        <div class="w-full">
+                            <img class="md:w-44 md:h-44 h-32 w-32 rounded-full m-auto drop-shadow-lg"
+                                src=@($"https://picsum.photos/400/400?random={excelTable[0].Id}") />
+                        </div>
+                        <div class="w-full absolute bottom-0 h-[75%] bg-amber-400 rounded-t-lg shadow-lg">
+                            <div class="w-full my-8">
+                                <p
+                                    class="text-center font-bold font-['QuickSand'] lg:text-3xl text-xl text-white drop-shadow-lg">
+                                    @excelTable[0].Name</p>
+                            </div>
+                            <div class="w-full">
+                                <img class="md:w-44 md:h-44 h-32 w-32 drop-shadow-lg m-auto" src="./assets/Gold-medal.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full bottom-0 h-full relative">
+                        <div class="w-full">
+                            <img class="md:w-44 md:h-44 h-32 w-32 rounded-full m-auto drop-shadow-lg"
+                                src=@($"https://picsum.photos/400/400?random={excelTable[2].Id}") />
+                        </div>
+                        <div class="w-full absolute bottom-0 h-[50%] bg-green-500 rounded-t-lg shadow-lg">
+                            <div class="w-full my-8">
+                                <p
+                                    class="text-center font-bold font-['QuickSand'] lg:text-3xl text-xl text-white drop-shadow-lg">
+                                    @excelTable[2].Id</p>
+                            </div>
+                            <div class="w-full">
+                                <img class="md:w-44 md:h-44 h-32 w-32 drop-shadow-lg m-auto" src="./assets/Bronze-medal.png" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute w-full h-full ">
+                    <dotlottie-player class="w-full h-full"
+                        src="https://lottie.host/8f7837d6-c655-4443-bdc0-1a9d340f8307/ibeWhwJJsO.json" background="transparent"
+                        speed="1" loop autoplay></dotlottie-player>
+                </div>
             </div>
-        </div>
+        }
+
+
     }
 
 </div>
@@ -140,6 +262,7 @@
     private HubConnection? _hubConnection;
     private string message = "";
     List<ExcelDataShow> excelTable = new();
+    List<GroupData> excelGroup = new();
     protected override async Task OnInitializedAsync()
     {
         _hubConnection = new HubConnectionBuilder()
@@ -155,25 +278,49 @@
         _hubConnection.On<List<ExcelData>, string>("SendMessage", (datas, message) =>
         {
             excelTable.Clear();
+
+            excelGroup.Clear();
+
             if (message != "Imported")
             {
                 datas.ToList().ForEach(x =>
     {
         excelTable.Add(new ExcelDataShow(x));
+
+        if (!excelGroup.Any(y => y.GroupName == x.Group))
+        {
+            excelGroup.Add(new GroupData()
+                    {
+                        GroupName = x.Group,
+                        Point = x.Point
+                    });
+        }
+        else
+        {
+            excelGroup.Where(y => y.GroupName == x.Group).FirstOrDefault().Point += x.Point;
+        }
     });
-                @* if (excelTable.Count > 0)
-{
-ShowToast(message);
-} *@
             }
             else
             {
                 datas.OrderByDescending(x => x.Point)
-                .ToList()
-                .ForEach(x =>
-                {
-                    excelTable.Add(new ExcelDataShow(x));
-                });
+    .ToList()
+    .ForEach(x =>
+    {
+        excelTable.Add(new ExcelDataShow(x));
+        if (!excelGroup.Any(y => y.GroupName == x.Group))
+        {
+            excelGroup.Add(new GroupData()
+                    {
+                        GroupName = x.Group,
+                        Point = x.Point
+                    });
+        }
+        else
+        {
+            excelGroup.Where(y => y.GroupName == x.Group).FirstOrDefault().Point += x.Point;
+        }
+    });
             }
             InvokeAsync(StateHasChanged);
         });
@@ -208,7 +355,6 @@ ShowToast(message);
         else
         {
             await ShowToast("Maybe your admin is not online");
-
         }
 
     }
