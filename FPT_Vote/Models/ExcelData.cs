@@ -2,19 +2,22 @@ namespace FPT_Vote.Models
 {
     public class ExcelData
     {
+
+        public ExcelData()
+        {
+
+        }
+
         public int Id { get; set; } = 0;
         public string Name { get; set; } = string.Empty;
         public string Group { get; set; } = string.Empty;
         public int Point { get; set; } = 0;
-    }
 
-    public class ExcelDataShow : ExcelData
-    {
-        public string Rank { get; set; } = string.Empty;
-        public string RankImage { get; set; } = string.Empty;
-        public string Ordinal_Suffix { get; set; } = string.Empty;
+        public string? Rank { get; set; } = string.Empty;
+        public string? RankImage { get; set; } = string.Empty;
+        public string? Ordinal_Suffix { get; set; } = string.Empty;
 
-        public ExcelDataShow(ExcelData excelData)
+        public ExcelData(ExcelData excelData)
         {
             Id = excelData.Id;
             Name = excelData.Name;
@@ -57,3 +60,8 @@ namespace FPT_Vote.Models
 
     }
 }
+
+//     public class ExcelDataShow : ExcelData
+//     {
+
+// }

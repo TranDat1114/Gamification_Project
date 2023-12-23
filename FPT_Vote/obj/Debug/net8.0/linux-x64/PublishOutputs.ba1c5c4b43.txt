@@ -1,0 +1,7 @@
+D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\obj\Debug\net8.0\linux-x64\PubTmp\Out\appsettings.Development.json
+D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\obj\Debug\net8.0\linux-x64\PubTmp\Out\appsettings.json
+D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\obj\Debug\net8.0\linux-x64\PubTmp\Out\package-lock.json
+D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\obj\Debug\net8.0\linux-x64\PubTmp\Out\package.json
+D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\obj\Debug\net8.0\linux-x64\PubTmp\Out\FPT_Vote.pdb
+D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\obj\Debug\net8.0\linux-x64\PubTmp\Out\Sample.xlsx
+D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\obj\Debug\net8.0\linux-x64\PubTmp\Out\FPT_Vote

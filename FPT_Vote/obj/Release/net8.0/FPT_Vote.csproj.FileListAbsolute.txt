@@ -56,3 +56,17 @@ D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\obj\Release\net8.0\refint\FPT_Vo
 D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\obj\Release\net8.0\FPT_Vote.pdb
 D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\obj\Release\net8.0\FPT_Vote.genruntimeconfig.cache
 D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\obj\Release\net8.0\ref\FPT_Vote.dll
+D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\bin\Release\net8.0\wwwroot\assets\Bronze.png
+D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\bin\Release\net8.0\wwwroot\assets\Bronze-medal.png
+D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\bin\Release\net8.0\wwwroot\assets\Challenger.png
+D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\bin\Release\net8.0\wwwroot\assets\Diamond.png
+D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\bin\Release\net8.0\wwwroot\assets\Gold.png
+D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\bin\Release\net8.0\wwwroot\assets\Gold-medal.png
+D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\bin\Release\net8.0\wwwroot\assets\GrandMaster.png
+D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\bin\Release\net8.0\wwwroot\assets\Iron.png
+D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\bin\Release\net8.0\wwwroot\assets\Master.png
+D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\bin\Release\net8.0\wwwroot\assets\Platinum.png
+D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\bin\Release\net8.0\wwwroot\assets\Silver.png
+D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\bin\Release\net8.0\wwwroot\assets\Silver-medal.png
+D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\bin\Release\net8.0\wwwroot\css\app.min.css
+D:\Code\FPT\Phong\Gamification_Project\FPT_Vote\bin\Release\net8.0\Sample.xlsx

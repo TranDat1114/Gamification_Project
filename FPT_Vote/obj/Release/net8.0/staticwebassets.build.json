@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "adEMayS7AscfUBL+iJthlMpygmSH3EYwRxKMR4qshNI=",
+  "Hash": "34fJDGYBLtcxVsdiK1sY6DWF1B5Tc8+Wml6bRPz6n34=",
   "Source": "FPT_Vote",
   "BasePath": "_content/FPT_Vote",
   "Mode": "Default",
@@ -31,7 +31,7 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
+      "CopyToOutputDirectory": "Always",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\Bronze-medal.png"
     },
@@ -50,7 +50,7 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
+      "CopyToOutputDirectory": "Always",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\Bronze.png"
     },
@@ -69,7 +69,7 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
+      "CopyToOutputDirectory": "Always",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\Challenger.png"
     },
@@ -88,7 +88,7 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
+      "CopyToOutputDirectory": "Always",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\Diamond.png"
     },
@@ -107,7 +107,7 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
+      "CopyToOutputDirectory": "Always",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\Gold-medal.png"
     },
@@ -126,7 +126,7 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
+      "CopyToOutputDirectory": "Always",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\Gold.png"
     },
@@ -145,7 +145,7 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
+      "CopyToOutputDirectory": "Always",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\GrandMaster.png"
     },
@@ -164,7 +164,7 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
+      "CopyToOutputDirectory": "Always",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\Iron.png"
     },
@@ -183,7 +183,7 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
+      "CopyToOutputDirectory": "Always",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\Master.png"
     },
@@ -202,7 +202,7 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
+      "CopyToOutputDirectory": "Always",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\Platinum.png"
     },
@@ -221,7 +221,7 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
+      "CopyToOutputDirectory": "Always",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\Silver-medal.png"
     },
@@ -240,7 +240,7 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
+      "CopyToOutputDirectory": "Always",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\Silver.png"
     },
@@ -278,7 +278,7 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
+      "CopyToOutputDirectory": "Always",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\app.min.css"
     },

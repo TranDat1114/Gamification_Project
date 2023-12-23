@@ -6,11 +6,19 @@ using FPT_Vote.Models;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel; // Sử dụng XSSF cho định dạng .xlsx
 
+
+
 public class ExcelService : IExcelService
 {
-    public async Task<List<ExcelData>> ImportAsync(Stream stream)
+    public async Task<IndividuallyNGroup> ImportAsync(Stream stream)
     {
-        var dataList = new List<ExcelData>();
+
+        var dataModel = new IndividuallyNGroup()
+        {
+            Group = [],
+            Individually = []
+ 
+       };
 
         using (var memoryStream = new MemoryStream())
         {
@@ -35,11 +43,31 @@ public class ExcelService : IExcelService
                     Point = Convert.ToInt32(GetCellValue(row.GetCell(3)))
                 };
 
-                dataList.Add(data);
+                dataModel.Individually.Add(data);
             }
+
+            var sheet2 = workbook.GetSheetAt(1);
+
+            for (int rowIdx = 1; rowIdx <= sheet2.LastRowNum; rowIdx++)
+            {
+                var row = sheet2.GetRow(rowIdx);
+
+                if (row == null)
+                    continue;
+
+                var data = new GroupData
+                {
+                    GroupId = Convert.ToInt32(GetCellValue(row.GetCell(0))),
+                    GroupName = GetCellValue(row.GetCell(1)),
+                    Point = Convert.ToInt32(GetCellValue(row.GetCell(2)))
+                };
+
+                dataModel.Group.Add(data);
+            }
+
         }
 
-        return dataList;
+        return dataModel;
     }
 
     private static string GetCellValue(ICell cell)
@@ -87,6 +115,11 @@ public class ExcelService : IExcelService
             // Thêm các đối tượng DataModel khác nếu cần
         };
 
+        var groupDatas = new List<GroupData>(){
+            new() {GroupId=1, GroupName = "A", Point = 0 },
+            new() {GroupId=2, GroupName = "B", Point = 0 },
+        };
+
         string folderPath = Path.GetDirectoryName(filePath);
         string filePathAndName = Path.Combine(folderPath, title + ".xlsx");
 
@@ -96,10 +129,10 @@ public class ExcelService : IExcelService
         }
         using var workbook = new XSSFWorkbook();
         // Tạo một worksheet mới
-        var worksheet = workbook.CreateSheet("SampleSheet");
+        var worksheet1 = workbook.CreateSheet("SampleSheet_1");
 
         // Tạo một dòng mới cho tiêu đề cột
-        var headerRow = worksheet.CreateRow(0);
+        var headerRow = worksheet1.CreateRow(0);
         headerRow.CreateCell(0).SetCellValue("Id");
         headerRow.CreateCell(1).SetCellValue("Name");
         headerRow.CreateCell(2).SetCellValue("Group");
@@ -109,11 +142,27 @@ public class ExcelService : IExcelService
         for (int i = 0; i < dataModels.Count; i++)
         {
             var dataModel = dataModels[i];
-            var dataRow = worksheet.CreateRow(i + 1);
+            var dataRow = worksheet1.CreateRow(i + 1);
             dataRow.CreateCell(0).SetCellValue(dataModel.Id);
             dataRow.CreateCell(1).SetCellValue(dataModel.Name);
             dataRow.CreateCell(2).SetCellValue(dataModel.Group);
             dataRow.CreateCell(3).SetCellValue(dataModel.Point);
+        }
+
+        var worksheet2 = workbook.CreateSheet("SampleSheet_2");
+
+        var headerRow2 = worksheet2.CreateRow(0);
+        headerRow2.CreateCell(0).SetCellValue("Id");
+        headerRow2.CreateCell(1).SetCellValue("Group Name");
+        headerRow2.CreateCell(2).SetCellValue("Point");
+
+        for (int i = 0; i < groupDatas.Count; i++)
+        {
+            var dataModel = groupDatas[i];
+            var dataRow = worksheet2.CreateRow(i + 1);
+            dataRow.CreateCell(0).SetCellValue(dataModel.GroupId);
+            dataRow.CreateCell(1).SetCellValue(dataModel.GroupName);
+            dataRow.CreateCell(2).SetCellValue(dataModel.Point);
         }
 
         // Lưu workbook xuống đĩa
@@ -122,7 +171,7 @@ public class ExcelService : IExcelService
         return filePathAndName;
     }
 
-    public async Task ExportToExcel(string filePath, string title, List<ExcelData> datas)
+    public async Task ExportToExcel(string filePath, string title, List<ExcelData> datas, List<GroupData>? groupDatas)
     {
         string folderPath = Path.GetDirectoryName(filePath);
         if (!Directory.Exists(folderPath))
@@ -133,10 +182,10 @@ public class ExcelService : IExcelService
         string filePathAndName = Path.Combine(folderPath, title + ".xlsx");
         using var workbook = new XSSFWorkbook();
         // Tạo một worksheet mới
-        var worksheet = workbook.CreateSheet("Sheet 1");
+        var worksheet1 = workbook.CreateSheet("Sheet 1");
 
         // Tạo một dòng mới cho tiêu đề cột
-        var headerRow = worksheet.CreateRow(0);
+        var headerRow = worksheet1.CreateRow(0);
         headerRow.CreateCell(0).SetCellValue("Id");
         headerRow.CreateCell(1).SetCellValue("Name");
         headerRow.CreateCell(2).SetCellValue("Group");
@@ -146,11 +195,30 @@ public class ExcelService : IExcelService
         for (int i = 0; i < datas.Count; i++)
         {
             var dataModel = datas[i];
-            var dataRow = worksheet.CreateRow(i + 1);
+            var dataRow = worksheet1.CreateRow(i + 1);
             dataRow.CreateCell(0).SetCellValue(dataModel.Id);
             dataRow.CreateCell(1).SetCellValue(dataModel.Name);
             dataRow.CreateCell(2).SetCellValue(dataModel.Group);
             dataRow.CreateCell(3).SetCellValue(dataModel.Point);
+        }
+
+        if (groupDatas != null)
+        {
+            var worksheet2 = workbook.CreateSheet("Sheet 2");
+
+            var headerRow2 = worksheet2.CreateRow(0);
+            headerRow2.CreateCell(0).SetCellValue("Id");
+            headerRow2.CreateCell(1).SetCellValue("Group Name");
+            headerRow2.CreateCell(2).SetCellValue("Point");
+
+            for (int i = 0; i < groupDatas.Count; i++)
+            {
+                var dataModel = groupDatas[i];
+                var dataRow = worksheet2.CreateRow(i + 1);
+                dataRow.CreateCell(0).SetCellValue(dataModel.GroupId);
+                dataRow.CreateCell(1).SetCellValue(dataModel.GroupName);
+                dataRow.CreateCell(2).SetCellValue(dataModel.Point);
+            }
         }
 
         // Lưu workbook xuống đĩa

@@ -10,14 +10,14 @@ public class ExcelDataHub : Hub<ITableMessageClient>
         await Clients.All.ReceiveMessage("Connected");
         await base.OnConnectedAsync();
     }
-    public async Task SendDataTableUpdate(List<ExcelData> datas)
+    public async Task SendDataTableUpdate(IndividuallyNGroup datas)
     {
         await Clients.All.SendMessage(datas);
     }
-    public async Task SendDataTableSort(List<ExcelData> datas)
-    {
-        await Clients.All.SendMessage(datas, "Sorted");
-    }
+    // public async Task SendDataTableSort(List<ExcelData> datas)
+    // {
+    //     await Clients.All.SendMessage(datas, "Sorted");
+    // }
     public async Task EndGame(string message)
     {
         await Clients.All.ReceiveMessage(message);
@@ -30,5 +30,5 @@ public class ExcelDataHub : Hub<ITableMessageClient>
 public interface ITableMessageClient
 {
     Task ReceiveMessage(string message);
-    Task SendMessage(List<ExcelData> excelData, string message = "Imported");
+    Task SendMessage(IndividuallyNGroup excelData, string message = "Imported");
 }

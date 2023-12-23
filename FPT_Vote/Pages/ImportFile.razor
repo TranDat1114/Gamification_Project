@@ -49,13 +49,13 @@
 
    
     <button class="text-green-500 px-4 py-2 bg-white shadow-lg rounded-lg border" @onclick="SortPoint">Sort Point</button>
-    <button class="text-yellow-500 px-4 py-2 bg-white shadow-lg rounded-lg border" @onclick="SortGroup">Sort Group</button>
+    @* <button class="text-yellow-500 px-4 py-2 bg-white shadow-lg rounded-lg border" @onclick="SortGroup">Sort Group</button> *@
     </div>
 
 }
-@if (excelTable is not null)
+@if (excelTable.Individually.Count > 0 || excelTable.Group.Count > 0)
             {
-                <div class=" bg-white shadow-lg min-h-min p-4 rounded-lg">
+                <div class=" bg-white shadow-lg min-h-min p-4 rounded-lg my-4">
 
     <table class="table-auto border-collapse border border-slate-500 w-full ">
         <thead>
@@ -70,7 +70,7 @@
         </thead>
         <tbody>
             
-                @foreach (var item in excelTable)
+                @foreach (var item in excelTable.Individually)
                 {
                     <tr class=" my-2">
                         <td class="text-center border border-slate-600">@item.Id</td>
@@ -96,6 +96,46 @@
     </table>
                 </div>
 
+<hr/>
+                <div class=" bg-white shadow-lg min-h-min p-4 rounded-lg my-4">
+
+<table class="table-auto border-collapse border border-slate-500 w-full ">
+        <thead>
+            <tr class="my-2">
+                <th class="mx-2 border border-slate-600 ">#</th>
+                <th class="mx-2 border border-slate-600 ">Name</th>
+                <th class="mx-2 border border-slate-600 ">Minus</th>
+                <th class="mx-2 border border-slate-600 ">Point</th>
+                <th class="mx-2 border border-slate-600 ">Plus</th>
+            </tr>
+        </thead>
+        <tbody>
+                @foreach (var item in excelTable.Group)
+                {
+                    <tr class=" my-2">
+                        <td class="text-center border border-slate-600">@item.GroupId</td>
+                        <td class="text-center border border-slate-600">@item.GroupName</td>
+                        <td class="text-center border border-slate-600"> <button @onclick="() => MinusPoint(item.GroupId,SD.Group)">
+                            <div class=" p-1 rounded-md bg-red-400 hover:bg-red-500">
+                                    ➖
+                                </div>
+                            </button>
+                        </td>
+                        <td class="text-center border border-slate-600">@item.Point</td>
+
+                        <td class="text-center border border-slate-600">
+                            <button @onclick='() => PlusPoint(item.GroupId,SD.Group)'>
+                                <div class=" p-1 rounded-md bg-green-400 hover:bg-green-500">
+                                    ➕
+                                </div>
+                                </button>
+                        </td>
+                    </tr>
+                }
+                    </tbody>
+    </table>
+                </div>
+
 }
             else
             {
@@ -109,11 +149,20 @@
 
             }
 
+
+            
+
 </div>
 
 @code {
     private IBrowserFile excelFile;
-    private List<ExcelData> excelTable { get; set; }
+    
+
+private IndividuallyNGroup excelTable { get; set; } = new IndividuallyNGroup(){
+    Individually = new List<ExcelData>(),
+    Group = new List<GroupData>()
+};
+
     private HubConnection? _hubConnection;
 
     private int RangePoint { get; set; } = 1;
@@ -135,7 +184,13 @@
         {
             // Gọi hàm xử lý import từ thư viện đã chọn
             var datas = await _excelService.ImportAsync(excelFile.OpenReadStream());
+
+            var dataIndividual =datas.Individually;
+
+            var dataGroup = datas.Group;
+
             await UpdateExcelData(datas);
+
         }
     }
 
@@ -145,11 +200,12 @@
         .WithUrl(("http://localhost:5000/exceldatahub"))
         .Build();
 
-        _hubConnection.On<List<ExcelData>,string>("SendMessage", (datas,message) =>
+        _hubConnection.On<IndividuallyNGroup,string>("SendMessage", (datas,message) =>
         {
             excelTable = datas;
             InvokeAsync(StateHasChanged);
         });
+        
          _hubConnection.On<string>("ReceiveMessage", (message) =>
         {
             if(message == "Connected new client"){
@@ -159,7 +215,7 @@
         });
         await _hubConnection.StartAsync();
     }
-    private async Task UpdateExcelData(List<ExcelData> datas)
+    private async Task UpdateExcelData(IndividuallyNGroup datas)
     {
         if (_hubConnection is not null)
         {
@@ -167,9 +223,23 @@
         }
     }
 
-    private async Task PlusPoint(int id)
+
+    private async Task PlusPoint(int id,string? type = SD.Individually)
     {
-        var data = excelTable.Where(x => x.Id == id).FirstOrDefault();
+        if(type == SD.Group){
+            var data = excelTable.Group.Where(x => x.GroupId == id).FirstOrDefault();
+            if (data?.Point + RangePoint <= 99999)
+            {
+                data.Point += RangePoint;
+            }
+            else
+            {
+                data.Point = 99999;
+            }
+        }
+        else{
+
+        var data = excelTable.Individually.Where(x => x.Id == id).FirstOrDefault();
         if (data?.Point + RangePoint <= 99999)
         {
             data.Point += RangePoint;
@@ -178,15 +248,33 @@
         {
             data.Point = 99999;
         }
+        }
+
         if (_hubConnection is not null)
         {
             await _hubConnection.SendAsync("SendDataTableUpdate", excelTable);
         }
 
     }
-    private async Task MinusPoint(int id)
+    private async Task MinusPoint(int id, string? type = SD.Individually)
     {
-        var data = excelTable.Where(x => x.Id == id).FirstOrDefault();
+
+if(type == SD.Group){
+            var data = excelTable.Group.Where(x => x.GroupId == id).FirstOrDefault();
+            if (data?.Point - RangePoint >= 0)
+            {
+                data.Point -= RangePoint;
+
+            }
+            else
+            {
+                data.Point = 0;
+            }
+        }
+        else{
+
+
+        var data = excelTable.Individually.Where(x => x.Id == id).FirstOrDefault();
         if (data?.Point - RangePoint >= 0)
         {
             data.Point -= RangePoint;
@@ -196,6 +284,7 @@
         {
             data.Point = 0;
         }
+        }
         if (_hubConnection is not null)
         {
             await _hubConnection.SendAsync("SendDataTableUpdate", excelTable);
@@ -204,7 +293,7 @@
     }
     private async Task SortPoint()
     {
-        excelTable = excelTable.OrderByDescending(x => x.Point).ToList();
+        excelTable.Individually = excelTable.Individually.OrderByDescending(x => x.Point).ToList();
 
         if (_hubConnection is not null)
         {
@@ -212,24 +301,25 @@
         }
 }
 
+@* 
 private async Task SortGroup()
 {
-    var groupedData = excelTable.GroupBy(x => x.Group)
+    var groupedData = excelTable.Individually.GroupBy(x => x.Group)
                                .Select(g => new { Group = g.Key, TotalPoints = g.Sum(x => x.Point), Data = g.OrderByDescending(x => x.Point).ToList() })
                                .OrderByDescending(g => g.TotalPoints)
                                .ToList();
 
-    excelTable.Clear();
+    excelTable.Individually.Clear();
     foreach (var groupData in groupedData)
     {
-        excelTable.AddRange(groupData.Data);
+        excelTable.Individually.AddRange(groupData.Data);
     }
 
     if (_hubConnection is not null)
     {
         await _hubConnection.SendAsync("SendDataTableSort", excelTable);
     }
-}
+} *@
 
     private bool IsConnected => _hubConnection?.State == HubConnectionState.Connected;
 
@@ -248,7 +338,7 @@ private async Task SortGroup()
     }
     private async Task ExportData()
     {
-        await _excelService.ExportToExcel(@"./ExportData/", "Data", excelTable);
+        await _excelService.ExportToExcel(@"./ExportData/", "Data", excelTable.Individually,excelTable.Group);
         byte[] fileData = GetYourFileData("./ExportData/Data.xlsx");
     await _jsInterpop.SaveFileAs("Data.xlsx", fileData, js);
         await DeleteFile("./ExportData/Data.xlsx");

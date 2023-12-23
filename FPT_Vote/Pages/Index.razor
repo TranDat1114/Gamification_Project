@@ -9,7 +9,7 @@
         <div class="flex md:flex-row flex-col gap-5 justify-center">
             <div class="grid grid-flow-row gap-2 bg-white p-4 rounded-md shadow-lg ">
                 @{
-                    if (excelTable.Count > 0)
+                    if (excelTable.Individually.Count > 0)
                     {
                         int count = 0;
                         <div class="lg:h-20 w-full rounded-lg bg-[#f5f5f5] shadow-sm">
@@ -28,7 +28,7 @@
 
                             </div>
                         </div>
-                        foreach (var item in excelTable)
+                        foreach (var item in excelTable.Individually)
                         {
                             count++;
                             <div class="lg:h-20 w-full rounded-lg bg-[#f5f5f5] shadow-sm">
@@ -65,7 +65,7 @@
             </div>
 
             @{
-                if (excelGroup.Count > 0)
+                if (excelTable.Group.Count > 0)
                 {
                     int count = 0;
                     <div class="md:w-[400px] w-full bg-white p-4 rounded-md shadow-lg">
@@ -82,7 +82,7 @@
                                 </div>
                             </div>
 
-                            @foreach (var item in excelGroup)
+                            @foreach (var item in excelTable.Group)
                             {
                                 count++;
                                 <div class="lg:h-20 w-full rounded-lg bg-[#f5f5f5] shadow-sm p-4">
@@ -113,31 +113,31 @@
             <div class="w-full h-[800px] relative ">
                 <div class="bottom-0 absolute top-0 w-full flex items-end justify-center">
                     @* <div class="w-full bottom-0 h-full relative">
-                        <div class="w-full">
-                            <img class="md:w-44 md:h-44 h-32 w-32 rounded-full m-auto drop-shadow-lg"
-                                src=@($"https://picsum.photos/400/400?random={excelGroup[1].GroupId}") />
-                        </div>
-                        <div class="w-full absolute bottom-0 h-[60%] bg-teal-500 rounded-t-lg shadow-lg">
-                            <div class="w-full my-8">
-                                <p
-                                    class="text-center font-bold font-['QuickSand'] lg:text-3xl text-xl text-white drop-shadow-lg">
-                                    @excelGroup[1].GroupName</p>
-                            </div>
-                            <div class="w-full">
-                                <img class="md:w-44 md:h-44 h-32 w-32 drop-shadow-lg m-auto" src="./assets/Silver-medal.png" />
-                            </div>
-                        </div>
-                    </div> *@
+            <div class="w-full">
+            <img class="md:w-44 md:h-44 h-32 w-32 rounded-full m-auto drop-shadow-lg"
+            src=@($"https://picsum.photos/400/400?random={excelGroup[1].GroupId}") />
+            </div>
+            <div class="w-full absolute bottom-0 h-[60%] bg-teal-500 rounded-t-lg shadow-lg">
+            <div class="w-full my-8">
+            <p
+            class="text-center font-bold font-['QuickSand'] lg:text-3xl text-xl text-white drop-shadow-lg">
+            @excelGroup[1].GroupName</p>
+            </div>
+            <div class="w-full">
+            <img class="md:w-44 md:h-44 h-32 w-32 drop-shadow-lg m-auto" src="./assets/Silver-medal.png" />
+            </div>
+            </div>
+            </div> *@
                     <div class="w-[300px] bottom-0 h-full relative m-auto ">
                         <div class="w-full">
                             <img class="md:w-44 md:h-44 h-32 w-32 rounded-full m-auto drop-shadow-lg"
-                                src=@($"https://picsum.photos/400/400?random={excelGroup[0].GroupId}") />
+                                src=@($"https://picsum.photos/400/400?random={excelTable.Group[0].GroupId}") />
                         </div>
                         <div class="w-full absolute bottom-0 h-[75%] bg-amber-400 rounded-t-lg shadow-lg">
                             <div class="w-full my-8">
                                 <p
                                     class="text-center font-bold font-['QuickSand'] lg:text-3xl text-xl text-white drop-shadow-lg">
-                                    @excelGroup[0].GroupName</p>
+                                    @excelTable.Group[0].GroupName</p>
                             </div>
                             <div class="w-full">
                                 <img class="md:w-44 md:h-44 h-32 w-32 drop-shadow-lg m-auto" src="./assets/Gold-medal.png" />
@@ -145,21 +145,21 @@
                         </div>
                     </div>
                     @* <div class="w-full bottom-0 h-full relative">
-                        <div class="w-full">
-                            <img class="md:w-44 md:h-44 h-32 w-32 rounded-full m-auto drop-shadow-lg"
-                                src=@($"https://picsum.photos/400/400?random={excelGroup[2].GroupId}") />
-                        </div>
-                        <div class="w-full absolute bottom-0 h-[50%] bg-green-500 rounded-t-lg shadow-lg">
-                            <div class="w-full my-8">
-                                <p
-                                    class="text-center font-bold font-['QuickSand'] lg:text-3xl text-xl text-white drop-shadow-lg">
-                                    @excelGroup[2].GroupName</p>
-                            </div>
-                            <div class="w-full">
-                                <img class="md:w-44 md:h-44 h-32 w-32 drop-shadow-lg m-auto" src="./assets/Bronze-medal.png" />
-                            </div>
-                        </div>
-                    </div> *@
+            <div class="w-full">
+            <img class="md:w-44 md:h-44 h-32 w-32 rounded-full m-auto drop-shadow-lg"
+            src=@($"https://picsum.photos/400/400?random={excelGroup[2].GroupId}") />
+            </div>
+            <div class="w-full absolute bottom-0 h-[50%] bg-green-500 rounded-t-lg shadow-lg">
+            <div class="w-full my-8">
+            <p
+            class="text-center font-bold font-['QuickSand'] lg:text-3xl text-xl text-white drop-shadow-lg">
+            @excelGroup[2].GroupName</p>
+            </div>
+            <div class="w-full">
+            <img class="md:w-44 md:h-44 h-32 w-32 drop-shadow-lg m-auto" src="./assets/Bronze-medal.png" />
+            </div>
+            </div>
+            </div> *@
                 </div>
                 <div class="absolute w-full h-full ">
                     <dotlottie-player class="w-full h-full"
@@ -167,19 +167,21 @@
                         speed="1" loop autoplay></dotlottie-player>
                 </div>
             </div>
-        }else{
-           <div class="w-full h-[800px] relative ">
+        }
+        else
+        {
+            <div class="w-full h-[800px] relative ">
                 <div class="bottom-0 absolute top-0 w-full grid grid-cols-3 items-end gap-2">
                     <div class="w-full bottom-0 h-full relative">
                         <div class="w-full">
                             <img class="md:w-44 md:h-44 h-32 w-32 rounded-full m-auto drop-shadow-lg"
-                                src=@($"https://picsum.photos/400/400?random={excelTable[1].Id}") />
+                                src=@($"https://picsum.photos/400/400?random={excelTable.Individually[1].Id}") />
                         </div>
                         <div class="w-full absolute bottom-0 h-[60%] bg-teal-500 rounded-t-lg shadow-lg">
                             <div class="w-full my-8">
                                 <p
                                     class="text-center font-bold font-['QuickSand'] lg:text-3xl text-xl text-white drop-shadow-lg">
-                                    @excelTable[1].Name</p>
+                                    @excelTable.Individually[1].Name</p>
                             </div>
                             <div class="w-full">
                                 <img class="md:w-44 md:h-44 h-32 w-32 drop-shadow-lg m-auto" src="./assets/Silver-medal.png" />
@@ -189,13 +191,13 @@
                     <div class="w-full bottom-0 h-full relative">
                         <div class="w-full">
                             <img class="md:w-44 md:h-44 h-32 w-32 rounded-full m-auto drop-shadow-lg"
-                                src=@($"https://picsum.photos/400/400?random={excelTable[0].Id}") />
+                                src=@($"https://picsum.photos/400/400?random={excelTable.Individually[0].Id}") />
                         </div>
                         <div class="w-full absolute bottom-0 h-[75%] bg-amber-400 rounded-t-lg shadow-lg">
                             <div class="w-full my-8">
                                 <p
                                     class="text-center font-bold font-['QuickSand'] lg:text-3xl text-xl text-white drop-shadow-lg">
-                                    @excelTable[0].Name</p>
+                                    @excelTable.Individually[0].Name</p>
                             </div>
                             <div class="w-full">
                                 <img class="md:w-44 md:h-44 h-32 w-32 drop-shadow-lg m-auto" src="./assets/Gold-medal.png" />
@@ -205,13 +207,13 @@
                     <div class="w-full bottom-0 h-full relative">
                         <div class="w-full">
                             <img class="md:w-44 md:h-44 h-32 w-32 rounded-full m-auto drop-shadow-lg"
-                                src=@($"https://picsum.photos/400/400?random={excelTable[2].Id}") />
+                                src=@($"https://picsum.photos/400/400?random={excelTable.Individually[2].Id}") />
                         </div>
                         <div class="w-full absolute bottom-0 h-[50%] bg-green-500 rounded-t-lg shadow-lg">
                             <div class="w-full my-8">
                                 <p
                                     class="text-center font-bold font-['QuickSand'] lg:text-3xl text-xl text-white drop-shadow-lg">
-                                    @excelTable[2].Id</p>
+                                    @excelTable.Individually[2].Name</p>
                             </div>
                             <div class="w-full">
                                 <img class="md:w-44 md:h-44 h-32 w-32 drop-shadow-lg m-auto" src="./assets/Bronze-medal.png" />
@@ -261,8 +263,13 @@
     private bool isLoading = false;
     private HubConnection? _hubConnection;
     private string message = "";
-    List<ExcelDataShow> excelTable = new();
-    List<GroupData> excelGroup = new();
+
+    IndividuallyNGroup excelTable = new()
+        {
+            Individually = new(),
+            Group = new()
+        };
+    @* List<GroupData> excelGroup = new(); *@
     protected override async Task OnInitializedAsync()
     {
         _hubConnection = new HubConnectionBuilder()
@@ -275,53 +282,37 @@
             InvokeAsync(StateHasChanged);
         });
 
-        _hubConnection.On<List<ExcelData>, string>("SendMessage", (datas, message) =>
+        _hubConnection.On<IndividuallyNGroup, string>("SendMessage", (datas, message) =>
         {
-            excelTable.Clear();
-
-            excelGroup.Clear();
+            excelTable.Individually.Clear();
+            excelTable.Group.Clear();
 
             if (message != "Imported")
             {
-                datas.ToList().ForEach(x =>
+                excelTable.Group = datas.Group;
+                datas.Individually.ToList().ForEach(x =>
     {
-        excelTable.Add(new ExcelDataShow(x));
+        excelTable.Individually.Add(new ExcelData(x));
 
-        if (!excelGroup.Any(y => y.GroupName == x.Group))
-        {
-            excelGroup.Add(new GroupData()
-                    {
-                        GroupName = x.Group,
-                        Point = x.Point
-                    });
-        }
-        else
-        {
-            excelGroup.Where(y => y.GroupName == x.Group).FirstOrDefault().Point += x.Point;
-        }
+
+
     });
             }
             else
             {
-                datas.OrderByDescending(x => x.Point)
+                excelTable.Group = datas.Group.OrderByDescending(x => x.Point).ToList();
+                datas.Individually.OrderByDescending(x => x.Point)
     .ToList()
     .ForEach(x =>
     {
-        excelTable.Add(new ExcelDataShow(x));
-        if (!excelGroup.Any(y => y.GroupName == x.Group))
-        {
-            excelGroup.Add(new GroupData()
-                    {
-                        GroupName = x.Group,
-                        Point = x.Point
-                    });
-        }
-        else
-        {
-            excelGroup.Where(y => y.GroupName == x.Group).FirstOrDefault().Point += x.Point;
-        }
+        excelTable.Individually.Add(new ExcelData(x));
+
     });
             }
+
+
+
+
             InvokeAsync(StateHasChanged);
         });
         await _hubConnection.StartAsync();
@@ -348,7 +339,7 @@
         await Task.Delay(1000);
 
         isLoading = false;
-        if (excelTable.Count > 0)
+        if (excelTable.Individually.Count > 0)
         {
             await ShowToast("Refreshed data successfully");
         }
